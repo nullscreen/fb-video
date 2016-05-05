@@ -2,7 +2,7 @@ module Funky
   class Videos
     def initialize(ids:)
       @fb_video = Video.new
-      @koala = Koala::Facebook::API.new
+      @koala = Koala::Facebook::API.new "#{ENV['FB_APP_ID']}|#{ENV['FB_APP_SECRET']}"
       @ids = Array ids
     end
 

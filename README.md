@@ -22,7 +22,14 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+You can send `fetch_data` method to a `Funky::Videos` object, which should be initialized with keyward argument `ids`, for an array of video id strings.
+
+```
+ids = ['10154439119663508', '10153834590672139']
+fb = Funky::Videos.new(ids: ids)
+fb.fetch_data
+# => {"10154439119663508"=>{"like_count"=>1169, "comment_count"=>65, "share_count"=>425, "view_count"=>33713}, "10153834590672139"=>{"like_count"=>535, "comment_count"=>36, "share_count"=>348, "view_count"=>19121}}
+```
 
 ## Development
 

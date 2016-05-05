@@ -1,5 +1,6 @@
 require "funky/version"
-require "koala/koala"
+
+require 'koala'
 require "funky/video"
 require "funky/videos"
 
