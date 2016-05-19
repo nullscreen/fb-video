@@ -1,35 +1,36 @@
 module Funky
   class Video
-    attr_reader :uri
+    attr_reader :data
 
-    def initialize(uri = nil)
-      @uri = URI uri if uri
+    def initialize(data)
+      @data = data
     end
 
-    def shares
-      response.match(/"sharecount":(.*?),/)
-      $1.delete(',').to_i
+    def like_count
+      summary_for 'likes'
     end
 
-    def views
-      response.match(/<div><\/div><span class="fcg">(.*) Views<\/span>/)
-      $1.delete(',').to_i
+    def comment_count
+      summary_for 'comments'
     end
 
-    def uri=(uri)
-      reset_response
-      @uri = URI uri
+    def share_count
+      scraper.shares
+    end
+
+    def view_count
+      scraper.views
     end
 
   private
 
-    def reset_response
-      @response = nil
+    def scraper
+      url = "https://www.facebook.com/video.php?v=#{data['id']}"
+      @scraper ||= Scraper.new url
     end
 
-    def response
-      raise "URI needs to be set" unless uri
-      @response ||= Net::HTTP.get(uri)
+    def summary_for(attribute)
+      data.fetch(attribute, {}).fetch('summary', {}).fetch('total_count', nil)
     end
   end
 end
