@@ -1,8 +1,8 @@
 require "funky/version"
 require 'koala'
 require 'funky/configuration'
+require 'funky/scraper'
 require "funky/video"
-require "funky/videos"
 
 module Funky
   def self.configuration

@@ -1,35 +1,62 @@
 module Funky
   class Video
-    attr_reader :uri
+    attr_reader :data
 
-    def initialize(uri = nil)
-      @uri = URI uri if uri
+    def initialize(data)
+      @data = data
     end
 
-    def shares
-      response.match(/"sharecount":(.*?),/)
-      $1.delete(',').to_i
+    def like_count
+      summary_for 'likes'
     end
 
-    def views
-      response.match(/<div><\/div><span class="fcg">(.*) Views<\/span>/)
-      $1.delete(',').to_i
+    def comment_count
+      summary_for 'comments'
     end
 
-    def uri=(uri)
-      reset_response
-      @uri = URI uri
+    def share_count
+      scraper.shares
+    end
+
+    def view_count
+      scraper.views
+    end
+
+    def self.where(ids:, fields:)
+      return nil unless ids
+      instantiate_videos(fetch_data ids, fields)
     end
 
   private
 
-    def reset_response
-      @response = nil
+    def scraper
+      url = "https://www.facebook.com/video.php?v=#{data['id']}"
+      @scraper ||= Scraper.new url
     end
 
-    def response
-      raise "URI needs to be set" unless uri
-      @response ||= Net::HTTP.get(uri)
+    def summary_for(attribute)
+      data.fetch(attribute, {}).fetch('summary', {}).fetch('total_count', nil)
+    end
+
+    def self.fetch_data(ids, fields)
+      fields = Array fields
+      ids = Array ids
+      koala.batch do |b|
+        ids.each do |id|
+          b.get_object(id, fields: fields) do |object|
+            object unless object.is_a? StandardError
+          end
+        end
+      end.compact
+    end
+
+    def self.instantiate_videos(items)
+      items.collect { |item| new item }
+    end
+
+    def self.koala
+      @koala ||= Koala::Facebook::API.new(
+        "#{Funky.configuration.app_id}|#{Funky.configuration.app_secret}")
     end
   end
 end

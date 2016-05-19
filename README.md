@@ -1,34 +1,19 @@
 # Funky
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/funky`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'funky'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install funky
+Under the hood, Funky hits FB's APIs on most cases, while other cases it will scrape FB's HTML to get the data. It's kind of... funky.
 
 ## Usage
 
-You can send `fetch_data` method to a `Funky::Videos` object, which should be initialized with keyward argument `ids`, for an array of video id strings.
+Right now it can only be used to get basic count data of Facebook videos.
 
-```
+```ruby
 ids = ['10154439119663508', '10153834590672139']
-fb = Funky::Videos.new(ids: ids)
-fb.fetch_data
-# => {"10154439119663508"=>{"like_count"=>1169, "comment_count"=>65, "share_count"=>425, "view_count"=>33713}, "10153834590672139"=>{"like_count"=>535, "comment_count"=>36, "share_count"=>348, "view_count"=>19121}}
+fb = Funky::Video.where(ids: ids, fields: ['likes.summary(true)', [comments.summary(true)]])
+videos.first.like_count    #=> 1169
+videos.first.comment_count #=> 65
+videos.first.share_count   #=> 348
+videos.first.view_count    #=> 10121
+
 ```
 
 ## Development
