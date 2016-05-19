@@ -8,8 +8,7 @@ Right now it can only be used to get basic count data of Facebook videos.
 
 ```ruby
 ids = ['10154439119663508', '10153834590672139']
-fb = Funky::Videos.new
-videos = fb.where(ids: ids, fields: ['likes.summary(true)', [comments.summary(true)]])
+fb = Funky::Video.where(ids: ids, fields: ['likes.summary(true)', [comments.summary(true)]])
 videos.first.like_count    #=> 1169
 videos.first.comment_count #=> 65
 videos.first.share_count   #=> 348
