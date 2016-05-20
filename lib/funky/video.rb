@@ -6,12 +6,29 @@ module Funky
       @data = data
     end
 
+    def id
+      data['id']
+    end
+
     def like_count
       summary_for 'likes'
     end
 
     def comment_count
       summary_for 'comments'
+    end
+
+    def created_time
+      datetime = data['created_time']
+      DateTime.parse datetime if datetime
+    end
+
+    def description
+      data['description']
+    end
+
+    def length
+      data['length']
     end
 
     def share_count
@@ -22,9 +39,9 @@ module Funky
       scraper.views
     end
 
-    def self.where(ids:, fields:)
+    def self.where(ids:)
       return nil unless ids
-      instantiate_videos(fetch_data ids, fields)
+      instantiate_videos(fetch_data ids)
     end
 
   private
@@ -38,8 +55,7 @@ module Funky
       data.fetch(attribute, {}).fetch('summary', {}).fetch('total_count', nil)
     end
 
-    def self.fetch_data(ids, fields)
-      fields = Array fields
+    def self.fetch_data(ids)
       ids = Array ids
       koala.batch do |b|
         ids.each do |id|
@@ -57,6 +73,16 @@ module Funky
     def self.koala
       @koala ||= Koala::Facebook::API.new(
         "#{Funky.configuration.app_id}|#{Funky.configuration.app_secret}")
+    end
+
+    def self.fields
+      [
+        'comments.summary(true)',
+        'created_time',
+        'description',
+        'length',
+        'likes.summary(true)'
+      ]
     end
   end
 end
