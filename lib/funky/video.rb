@@ -41,7 +41,7 @@ module Funky
 
     def self.where(ids:)
       return nil unless ids
-      instantiate_videos(fetch_data ids)
+      instantiate_collection(fetch_data ids)
     end
 
   private
@@ -66,7 +66,7 @@ module Funky
       end.compact
     end
 
-    def self.instantiate_videos(items)
+    def self.instantiate_collection(items)
       items.collect { |item| new item }
     end
 
