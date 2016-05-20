@@ -1,3 +1,4 @@
+require 'date'
 require "funky/version"
 require 'koala'
 require 'funky/configuration'

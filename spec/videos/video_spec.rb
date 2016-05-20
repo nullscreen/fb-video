@@ -1,118 +1,58 @@
 require 'spec_helper'
 
 describe 'Video' do
-  describe 'self.where' do
-    context 'given one correct video id and one field' do
-      let(:videos) do
-        Funky::Video.where ids:    '1042790765791228',
-                           fields: 'likes.summary(true)'
-      end
-
-      it 'should return one Video object in an Array' do
-        expect(videos).to be_instance_of(Array)
-        expect(videos.first).to be_instance_of(Funky::Video)
-      end
+  describe '.where(ids: video_id)' do
+    let(:video) do
+      Funky::Video.where(ids: '1042790765791228').first
     end
 
-    context 'given multiple video ids and one field' do
-      let(:videos) do
-        Funky::Video.where ids:    ['1042790765791228', '817186021719592'],
-                           fields: 'likes.summary(true)'
+    context 'given an existing video ID was passed' do
+      describe '.id' do
+        it { expect(video.id).to be_a(String) }
       end
 
-      it 'should return multiple Video objects in an Array' do
-        expect(videos).to be_instance_of(Array)
-        expect(videos.count).to eq(2)
-        expect(videos[0]).to be_instance_of(Funky::Video)
-        expect(videos[1]).to be_instance_of(Funky::Video)
-      end
-    end
-  end
-
-  describe '.like_count' do
-    context 'given expected data format is retrieved from Facebook' do
-      let(:video) do
-        Funky::Video.new("likes"=>{"summary"=>{"total_count"=>761}})
+      describe '.like_count' do
+        it { expect(video.like_count).to be_a(Fixnum) }
       end
 
-      it 'should return an Integer' do
-        expect(video.like_count).to eq(761)
-      end
-    end
-
-    context 'given unexpected data format is retrieved from Facebook' do
-      let(:video) do
-        Funky::Video.new("incorrect"=>{"summary"=>{"total_count"=>761}})
+      describe '.comment_count' do
+        it { expect(video.comment_count).to be_a(Fixnum) }
       end
 
-      it 'should return nil' do
-        expect(video.like_count).to be(nil)
+      describe '.share_count' do
+        it { expect(video.share_count).to be_a(Fixnum) }
+      end
+
+      describe '.view_count' do
+        it { expect(video.view_count).to be_a(Fixnum) }
+      end
+
+      describe '.created_time' do
+        it { expect(video.created_time).to be_a(DateTime) }
+      end
+
+      describe '.description' do
+        it { expect(video.description).to be_a(String) }
+      end
+
+      describe '.length' do
+        it { expect(video.length).to be_a(Float) }
       end
     end
   end
 
-  describe '.comment_count' do
-    context 'given expected data format is retrieved from Facebook' do
-      let(:video) do
-        Funky::Video.new("comments"=>{"summary"=>{"total_count"=>1234}})
-      end
-
-      it 'should return an Integer' do
-        expect(video.comment_count).to eq(1234)
-      end
+  describe '.where(ids: multiple_video_ids)' do
+    let(:multiple_video_ids) do
+      ['1042790765791228', '10154439119663508',
+        '817186021719592','827340920704102', '830518890386305',
+        '903078593095780', '1042754339128204', '1041643712572600',
+        '1042056582531313','1042669312451336']
     end
+    let(:videos) { Funky::Video.where(ids: multiple_video_ids) }
 
-    context 'given unexpected data format is retrieved from Facebook' do
-      let(:video) do
-        Funky::Video.new("incorrect"=>{"summary"=>{"total_count"=>1234}})
-      end
-
-      it 'should return nil' do
-        expect(video.comment_count).to be(nil)
-      end
-    end
-  end
-
-  describe '.share_count' do
-    context 'given expected data format is retrieved from Facebook' do
-      let(:video) do
-        Funky::Video.new("id" => "1042790765791228")
-      end
-
-      it 'should return an Integer' do
-        expect(video.share_count.is_a? Integer).to be(true)
-      end
-    end
-
-    context 'given unexpected data format is retrieved from Facebook' do
-      let(:video) do
-        Funky::Video.new("id" => "doesnotexist")
-      end
-
-      it 'should return nil' do
-        expect(video.share_count).to be(nil)
-      end
-    end
-  end
-
-  describe '.view_count' do
-    context 'given expected data format is retrieved from Facebook' do
-      let(:video) do
-        Funky::Video.new("id" => "1042790765791228")
-      end
-
-      it 'should return an Integer' do
-        expect(video.view_count.is_a? Integer).to be(true)
-      end
-    end
-
-    context 'given unexpected data format is retrieved from Facebook' do
-      let(:video) do
-        Funky::Video.new("id" => "doesnotexist")
-      end
-
-      it 'should return nil' do
-        expect(video.view_count).to be(nil)
+    context 'given multiple existing video IDs were passed' do
+      specify 'returns one video for each id, in the same order provided' do
+        expect(videos.map &:id).to eq(multiple_video_ids)
       end
     end
   end
