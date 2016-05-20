@@ -8,7 +8,7 @@ Right now it can only be used to get basic count data of Facebook videos.
 
 ```ruby
 ids = ['10154439119663508', '10153834590672139']
-fb = Funky::Video.where(ids: ids, fields: ['likes.summary(true)', [comments.summary(true)]])
+videos = Funky::Video.where(ids: ids, fields: ['likes.summary(true)', 'comments.summary(true)'])
 videos.first.like_count    #=> 1169
 videos.first.comment_count #=> 65
 videos.first.share_count   #=> 348
@@ -24,7 +24,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/funky. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/fullscreen/funky. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
