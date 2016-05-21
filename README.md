@@ -4,11 +4,12 @@ Under the hood, Funky hits FB's APIs on most cases, while other cases it will sc
 
 ## Usage
 
-Right now it can only be used to get basic count data of Facebook videos.
+Right now it can only be used to get certain data of Facebook videos.
 
 ```ruby
 ids = ['10154439119663508', '10153834590672139']
 videos = Funky::Video.where(ids: ids)
+videos.first.id            #=> '10154439119663508'
 videos.first.like_count    #=> 1169
 videos.first.comment_count #=> 65
 videos.first.share_count   #=> 348
@@ -17,6 +18,16 @@ videos.first.created_time  #=> #<DateTime: 2015-12-17T06:29:48+00:00>
 videos.first.description   #=> "Hugh Jackman coaches Great Britain's..."
 videos.first.length        #=> 147.05
 
+```
+
+If a non-existing video ID is passed into the where clause, it is ignored. Other video IDs will still be retrieved.
+
+```ruby
+ids = ['10154439119663508', '10153834590672139', 'doesnotexist']
+videos = Funky::Video.where(ids: ids)
+videos.count    #=> 2
+videos.first.id #=> '10154439119663508'
+videos.last.id  #=> '10153834590672139'
 ```
 
 ## Development

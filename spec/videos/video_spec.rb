@@ -48,11 +48,23 @@ describe 'Video' do
         '903078593095780', '1042754339128204', '1041643712572600',
         '1042056582531313','1042669312451336']
     end
+    let(:multiple_video_ids_with_one_bad) do
+      multiple_video_ids + ['doesnotexist']
+    end
     let(:videos) { Funky::Video.where(ids: multiple_video_ids) }
+    let(:videos_with_a_bad_id) do
+      Funky::Video.where(ids: multiple_video_ids_with_one_bad)
+    end
 
     context 'given multiple existing video IDs were passed' do
       specify 'returns one video for each id, in the same order provided' do
         expect(videos.map &:id).to eq(multiple_video_ids)
+      end
+    end
+
+    context 'given a non-existing video id passed with other video ids' do
+      specify 'returns only the existing videos' do
+        expect(videos_with_a_bad_id.map &:id).to eq(multiple_video_ids)
       end
     end
   end
