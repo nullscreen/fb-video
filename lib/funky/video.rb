@@ -10,14 +10,6 @@ module Funky
       data['id']
     end
 
-    def like_count
-      summary_for 'likes'
-    end
-
-    def comment_count
-      summary_for 'comments'
-    end
-
     def created_time
       datetime = data['created_time']
       DateTime.parse datetime if datetime
@@ -29,6 +21,14 @@ module Funky
 
     def length
       data['length']
+    end
+
+    def like_count
+      scraper.likes
+    end
+
+    def comment_count
+      scraper.comments
     end
 
     def share_count
@@ -49,10 +49,6 @@ module Funky
     def scraper
       url = "https://www.facebook.com/video.php?v=#{data['id']}"
       @scraper ||= Scraper.new url
-    end
-
-    def summary_for(attribute)
-      data.fetch(attribute, {}).fetch('summary', {}).fetch('total_count', nil)
     end
 
     def self.fetch_data(ids)
@@ -77,11 +73,9 @@ module Funky
 
     def self.fields
       [
-        'comments.summary(true)',
         'created_time',
         'description',
-        'length',
-        'likes.summary(true)'
+        'length'
       ]
     end
   end
