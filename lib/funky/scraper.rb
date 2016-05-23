@@ -16,6 +16,16 @@ module Funky
       $1 ? $1.delete(',').to_i : nil
     end
 
+    def likes
+      response.match /"likecount":(.*?),/
+      $1 ? $1.delete(',').to_i : nil
+    end
+
+    def comments
+      response.match /"commentcount":(.*?),/
+      $1 ? $1.delete(',').to_i : nil
+    end
+
   private
 
     def response
