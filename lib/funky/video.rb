@@ -24,19 +24,19 @@ module Funky
     end
 
     def like_count
-      scraper.likes
+      scrape.likes
     end
 
     def comment_count
-      scraper.comments
+      scrape.comments
     end
 
     def share_count
-      scraper.shares
+      scrape.shares
     end
 
     def view_count
-      scraper.views
+      scrape.views
     end
 
     def self.where(ids:)
@@ -46,9 +46,9 @@ module Funky
 
   private
 
-    def scraper
+    def scrape
       url = "https://www.facebook.com/video.php?v=#{data['id']}"
-      @scraper ||= Scraper.new url
+      @scrape ||= Scraper.new url
     end
 
     def self.fetch_data(ids)
