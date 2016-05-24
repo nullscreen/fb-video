@@ -4,6 +4,8 @@ module Funky
 
     def initialize(uri)
       @response ||= Net::HTTP.get(URI uri)
+    rescue SocketError => e
+      raise ConnectionError, e.message
     end
 
     def shares
