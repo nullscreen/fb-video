@@ -23,6 +23,10 @@ module Funky
       data['length']
     end
 
+    def picture
+      data['picture']
+    end
+
     def like_count
       scraper.likes
     end
@@ -83,7 +87,8 @@ module Funky
       [
         'created_time',
         'description',
-        'length'
+        'length',
+        'picture'
       ]
     end
   end

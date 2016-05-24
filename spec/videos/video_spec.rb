@@ -16,6 +16,7 @@ describe 'Video' do
       it { expect(video.created_time).to be_a(DateTime) }
       it { expect(video.description).to be_a(String) }
       it { expect(video.length).to be_a(Float) }
+      it { expect(video.picture).to be_a(String)}
     end
 
     context 'given multiple existing video IDs were passed' do
