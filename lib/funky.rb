@@ -1,6 +1,7 @@
 require 'date'
 require "funky/version"
 require 'koala'
+require 'funky/errors'
 require 'funky/configuration'
 require 'funky/scraper'
 require "funky/video"

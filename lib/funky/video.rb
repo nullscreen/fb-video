@@ -11,48 +11,64 @@ module Funky
     end
 
     def created_time
-      datetime = data['created_time']
+      datetime = fetch 'created_time'
       DateTime.parse datetime if datetime
     end
 
     def description
-      data['description']
+      fetch 'description'
     end
 
     def length
-      data['length']
+      fetch 'length'
     end
 
     def like_count
-      scrape.likes
+      scraper.likes
     end
 
     def comment_count
-      scrape.comments
+      scraper.comments
     end
 
     def share_count
-      scrape.shares
+      scraper.shares
     end
 
     def view_count
-      scrape.views
+      scraper.views
     end
 
-    def self.where(ids:)
-      return nil unless ids
-      instantiate_collection(fetch_data ids)
+    def self.where(id:)
+      return nil unless id
+      instantiate_collection(fetch_data Array(id))
+    end
+
+    def self.find(video_id)
+      video = new('id' => video_id)
+      if video.view_count
+        video
+      else
+        raise ContentNotFound, 'Please double check the ID and try again.'
+      end
     end
 
   private
 
-    def scrape
+    def scraper
       url = "https://www.facebook.com/video.php?v=#{data['id']}"
-      @scrape ||= Scraper.new url
+      @scraper ||= Scraper.new url
+    end
+
+    def fetch(attribute)
+      unless data[attribute]
+        fetched_data = self.class.fetch_data(data['id']).first
+        data.merge! fetched_data if fetched_data
+      end
+      data[attribute]
     end
 
     def self.fetch_data(ids)
-      ids = Array ids
       koala.batch do |b|
         ids.each do |id|
           b.get_object(id, fields: fields) do |object|
