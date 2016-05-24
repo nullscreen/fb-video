@@ -11,16 +11,16 @@ module Funky
     end
 
     def created_time
-      datetime = fetch 'created_time'
+      datetime = data['created_time']
       DateTime.parse datetime if datetime
     end
 
     def description
-      fetch 'description'
+      data['description']
     end
 
     def length
-      fetch 'length'
+      data['length']
     end
 
     def like_count
@@ -58,14 +58,6 @@ module Funky
     def scraper
       url = "https://www.facebook.com/video.php?v=#{data['id']}"
       @scraper ||= Scraper.new url
-    end
-
-    def fetch(attribute)
-      unless data[attribute]
-        fetched_data = self.class.fetch_data(data['id']).first
-        data.merge! fetched_data if fetched_data
-      end
-      data[attribute]
     end
 
     def self.fetch_data(ids)
