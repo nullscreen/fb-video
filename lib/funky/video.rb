@@ -102,6 +102,8 @@ module Funky
           end
         end
       end.compact
+    rescue Faraday::ConnectionFailed => e
+      raise ConnectionError, e.message
     end
 
     def self.instantiate_collection(items)
