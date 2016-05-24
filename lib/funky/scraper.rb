@@ -1,35 +1,35 @@
 module Funky
   class Scraper
-    attr_reader :uri
+    attr_reader :response
 
     def initialize(uri)
-      @uri = URI uri
+      @response ||= Net::HTTP.get(URI uri)
     end
 
     def shares
       response.match(/"sharecount":(.*?),/)
-      $1 ? $1.delete(',').to_i : nil
+      matched_count $1
     end
 
     def views
       response.match(/<div><\/div><span class="fcg">(.*) Views<\/span>/)
-      $1 ? $1.delete(',').to_i : nil
+      matched_count $1
     end
 
     def likes
       response.match /"likecount":(.*?),/
-      $1 ? $1.delete(',').to_i : nil
+      matched_count $1
     end
 
     def comments
       response.match /"commentcount":(.*?),/
-      $1 ? $1.delete(',').to_i : nil
+      matched_count $1
     end
 
   private
 
-    def response
-      @response ||= Net::HTTP.get(uri)
+    def matched_count(matched)
+      matched ? matched.delete(',').to_i : nil
     end
   end
 end
