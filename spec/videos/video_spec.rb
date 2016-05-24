@@ -1,71 +1,56 @@
 require 'spec_helper'
 
 describe 'Video' do
-  describe '.where(ids: video_id)' do
-    let(:video) do
-      Funky::Video.where(ids: '1042790765791228').first
+  let(:existing_video_id) { '1042790765791228' }
+  let(:unknown_video_id) { 'does-not-exist' }
+  let(:another_video_id) { '1042790765791228' }
+
+  describe '.where(id: video_ids)' do
+    let(:videos) { Funky::Video.where(id: video_ids) }
+
+    context 'given one existing video ID was passed' do
+      let(:video_ids) {existing_video_id}
+      let(:video) {videos.first}
+
+      it { expect(video.id).to be_a(String) }
+      it { expect(video.created_time).to be_a(DateTime) }
+      it { expect(video.description).to be_a(String) }
+      it { expect(video.length).to be_a(Float) }
     end
 
-    context 'given an existing video ID was passed' do
-      describe '.id' do
-        it { expect(video.id).to be_a(String) }
+    context 'given multiple existing video IDs were passed' do
+      let(:video_ids) { [existing_video_id, another_video_id] }
+      specify 'returns one video for each id, in the same order provided' do
+        expect(videos.map &:id).to eq(video_ids)
       end
+    end
 
-      describe '.like_count' do
-        it { expect(video.like_count).to be_a(Fixnum) }
-      end
+    context 'given an unknown video id passed with an existing video id' do
+      let(:video_ids) { [existing_video_id, unknown_video_id] }
 
-      describe '.comment_count' do
-        it { expect(video.comment_count).to be_a(Fixnum) }
-      end
-
-      describe '.share_count' do
-        it { expect(video.share_count).to be_a(Fixnum) }
-      end
-
-      describe '.view_count' do
-        it { expect(video.view_count).to be_a(Fixnum) }
-      end
-
-      describe '.created_time' do
-        it { expect(video.created_time).to be_a(DateTime) }
-      end
-
-      describe '.description' do
-        it { expect(video.description).to be_a(String) }
-      end
-
-      describe '.length' do
-        it { expect(video.length).to be_a(Float) }
+      specify 'returns only the existing videos' do
+        expect(videos.map &:id).to eq([existing_video_id])
       end
     end
   end
 
-  describe '.where(ids: multiple_video_ids)' do
-    let(:multiple_video_ids) do
-      ['1042790765791228', '10154439119663508',
-        '817186021719592','827340920704102', '830518890386305',
-        '903078593095780', '1042754339128204', '1041643712572600',
-        '1042056582531313','1042669312451336']
-    end
-    let(:multiple_video_ids_with_one_bad) do
-      multiple_video_ids + ['doesnotexist']
-    end
-    let(:videos) { Funky::Video.where(ids: multiple_video_ids) }
-    let(:videos_with_a_bad_id) do
-      Funky::Video.where(ids: multiple_video_ids_with_one_bad)
+  describe '.find(video_id)' do
+    let(:video) {Funky::Video.find(video_id)}
+
+    context 'given an existing video ID was passed' do
+      let(:video_id) { existing_video_id }
+
+      it { expect(video.id).to be_a(String) }
+      it { expect(video.like_count).to be_an(Integer) }
+      it { expect(video.comment_count).to be_an(Integer) }
+      it { expect(video.share_count).to be_an(Integer) }
+      it { expect(video.view_count).to be_an(Integer) }
     end
 
-    context 'given multiple existing video IDs were passed' do
-      specify 'returns one video for each id, in the same order provided' do
-        expect(videos.map &:id).to eq(multiple_video_ids)
-      end
-    end
+    context 'given a non-existing video ID was passed' do
+      let(:video_id) { unknown_video_id }
 
-    context 'given a non-existing video id passed with other video ids' do
-      specify 'returns only the existing videos' do
-        expect(videos_with_a_bad_id.map &:id).to eq(multiple_video_ids)
-      end
+      it { expect {video}.to raise_error(Funky::ContentNotFound) }
     end
   end
 end

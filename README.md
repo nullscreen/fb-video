@@ -6,14 +6,12 @@ Under the hood, Funky hits FB's APIs on most cases, while other cases it will sc
 
 Right now it can only be used to get certain data of Facebook videos.
 
+### Use #where clause to get an array of videos
+
 ```ruby
 ids = ['10154439119663508', '10153834590672139']
-videos = Funky::Video.where(ids: ids)
+videos = Funky::Video.where(id: ids)
 videos.first.id            #=> '10154439119663508'
-videos.first.like_count    #=> 1169
-videos.first.comment_count #=> 65
-videos.first.share_count   #=> 348
-videos.first.view_count    #=> 10121
 videos.first.created_time  #=> #<DateTime: 2015-12-17T06:29:48+00:00>
 videos.first.description   #=> "Hugh Jackman coaches Great Britain's..."
 videos.first.length        #=> 147.05
@@ -24,10 +22,27 @@ If a non-existing video ID is passed into the where clause, it is ignored. Other
 
 ```ruby
 ids = ['10154439119663508', '10153834590672139', 'doesnotexist']
-videos = Funky::Video.where(ids: ids)
+videos = Funky::Video.where(id: ids)
 videos.count    #=> 2
 videos.first.id #=> '10154439119663508'
 videos.last.id  #=> '10153834590672139'
+```
+
+### Use #find to get a single video
+
+```ruby
+video = Funky::Video.find('10154439119663508')
+video.id            #=> '10154439119663508'
+video.like_count    #=> 1169
+video.comment_count #=> 65
+video.share_count   #=> 348
+video.view_count    #=> 10121
+```
+
+If a non-existing video ID is passed into #find, Funky::ContentNotFound will be raised.
+
+```ruby
+Funky::Video.find('doesnotexist') #=> Funky::ContentNotFound
 ```
 
 ## Development
