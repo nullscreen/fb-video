@@ -1,10 +1,12 @@
 # Funky
 
-Under the hood, Funky hits FB's APIs on most cases, while other cases it will scrape FB's HTML to get the data. It's kind of... funky.
+Under the hood, Funky hits Facebook's APIs on some cases, while other cases it will scrape Facebook's HTML to get the data. It's kind of... funky.
+
+A lot of data that are made public on Facebook's various posts are strangely not available from Facebook's Graph API without very specific permissions. For example, even though the number of shares and views are shown publicly in the web page, the Graph API will not return those results unless the user has insight permissions for that video. Funky can get around that limitation by scraping HTML. While where possible, it will use Facebook's Graph API.
 
 ## Usage
 
-Right now it can only be used to get certain data of Facebook videos.
+This is still a very early version, and it currently can only retrieve certain Facebook video data.
 
 ### Use #where clause to get an array of videos
 
