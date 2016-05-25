@@ -48,6 +48,16 @@ If a non-existing video ID is passed into #find, Funky::ContentNotFound will be 
 Funky::Video.find('doesnotexist') #=> Funky::ContentNotFound
 ```
 
+### Connection error
+
+Should there be a case where Funky is unable to connect to facebook, `Funky::ConnectionError` will be raised.
+
+```ruby
+# Given funky is unable to establish a connection to facebook
+Funky::Video.find('10154439119663508') #=> Funky::ConnectionError
+Funky::Video.where(id: '10154439119663508') #=> Funky::ConnectionError
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
