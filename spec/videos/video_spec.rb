@@ -33,6 +33,15 @@ describe 'Video' do
         expect(videos.map &:id).to eq([existing_video_id])
       end
     end
+
+    context 'given a Faraday::ConnectionFailed error' do
+      let(:video_ids) { [existing_video_id, another_video_id] }
+      let(:connection_failed) { Faraday::ConnectionFailed.new 'nothing' }
+
+      before { expect(Faraday).to(receive(:new).and_raise connection_failed) }
+
+      it { expect { videos }.to raise_error(Funky::ConnectionError) }
+    end
   end
 
   describe '.find(video_id)' do
@@ -52,6 +61,15 @@ describe 'Video' do
       let(:video_id) { unknown_video_id }
 
       it { expect {video}.to raise_error(Funky::ContentNotFound) }
+    end
+
+    context 'given a SocketError' do
+      let(:video_id) { existing_video_id }
+      let(:socket_error) { SocketError.new }
+
+      before { expect(Net::HTTP).to(receive(:start).and_raise socket_error) }
+
+      it { expect { video }.to raise_error(Funky::ConnectionError) }
     end
   end
 end
