@@ -36,9 +36,9 @@ describe 'Video' do
 
     context 'given a Faraday::ConnectionFailed error' do
       let(:video_ids) { [existing_video_id, another_video_id] }
-      let(:connection_failed) { Faraday::ConnectionFailed.new 'nothing' }
+      let(:socket_error) { SocketError.new }
 
-      before { expect(Faraday).to(receive(:new).and_raise connection_failed) }
+      before { expect(Net::HTTP).to(receive(:start).and_raise socket_error) }
 
       it { expect { videos }.to raise_error(Funky::ConnectionError) }
     end

@@ -67,7 +67,7 @@ module Funky
     #   containing data obtained by Facebook's APIs.
     def self.where(id:)
       return nil unless id
-      instantiate_collection(fetch_data Array(id))
+      instantiate_collection(fetch_and_parse_data Array(id))
     end
 
     # Fetches the data from Facebook's HTML and instantiates the data
@@ -94,25 +94,35 @@ module Funky
       @scraper ||= Scraper.new url
     end
 
-    def self.fetch_data(ids)
-      koala.batch do |b|
-        ids.each do |id|
-          b.get_object(id, fields: fields) do |object|
-            object unless object.is_a? StandardError
-          end
-        end
-      end.compact
-    rescue Faraday::ConnectionFailed => e
+    def self.fetch_and_parse_data(ids)
+      if ids.is_a?(Array) && ids.size > 1
+        response = Connection::API.batch_request(ids: ids, fields: fields)
+      else
+        id = ids.is_a?(Array) ? ids.first : ids
+        response = Connection::API.request(id: id, fields: fields)
+      end
+      parse response
+    rescue SocketError => e
       raise ConnectionError, e.message
+    end
+
+    def self.parse(response)
+      if response.code == '200'
+        body = JSON.parse response.body
+        if body.is_a? Array
+          body.collect do|item|
+            JSON.parse(item['body']) if item['code'] == 200
+          end.compact
+        else
+          [body]
+        end
+      else
+        raise ContentNotFound, 'Please check IDs'
+      end
     end
 
     def self.instantiate_collection(items)
       items.collect { |item| new item }
-    end
-
-    def self.koala
-      @koala ||= Koala::Facebook::API.new(
-        "#{Funky.configuration.app_id}|#{Funky.configuration.app_secret}")
     end
 
     def self.fields

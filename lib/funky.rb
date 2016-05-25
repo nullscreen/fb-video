@@ -1,7 +1,7 @@
 require 'date'
 require "funky/version"
-require 'koala'
 require 'funky/errors'
+require 'net/http'
 require 'funky/connections/web'
 require 'funky/connections/api'
 require 'funky/configuration'
