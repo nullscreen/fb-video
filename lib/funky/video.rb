@@ -101,8 +101,6 @@ module Funky
         response = Connection::API.request(id: id, fields: fields)
       end
       parse response
-    rescue SocketError => e
-      raise ConnectionError, e.message
     end
 
     def self.parse(response)

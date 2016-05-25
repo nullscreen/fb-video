@@ -13,6 +13,8 @@ module Funky
           http.request http_request
         end
         response
+      rescue SocketError => e
+        raise ConnectionError, e.message
       end
     end
   end

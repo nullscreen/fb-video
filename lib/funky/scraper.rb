@@ -4,8 +4,6 @@ module Funky
 
     def initialize(id)
       @response ||= Connection::Web.request(id: id).body
-    rescue SocketError => e
-      raise ConnectionError, e.message
     end
 
     def shares
