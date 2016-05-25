@@ -90,8 +90,7 @@ module Funky
   private
 
     def scraper
-      url = "https://www.facebook.com/video.php?v=#{data['id']}"
-      @scraper ||= Scraper.new url
+      @scraper ||= Scraper.new id
     end
 
     def self.fetch_and_parse_data(ids)

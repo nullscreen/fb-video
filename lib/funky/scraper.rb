@@ -2,8 +2,8 @@ module Funky
   class Scraper
     attr_reader :response
 
-    def initialize(uri)
-      @response ||= Net::HTTP.get(URI uri)
+    def initialize(id)
+      @response ||= Connection::Web.request(id: id).body
     rescue SocketError => e
       raise ConnectionError, e.message
     end
