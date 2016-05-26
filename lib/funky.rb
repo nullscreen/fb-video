@@ -2,10 +2,8 @@ require 'date'
 require "funky/version"
 require 'funky/errors'
 require 'net/http'
-require 'funky/connections/web'
 require 'funky/connections/api'
 require 'funky/configuration'
-require 'funky/scraper'
 require "funky/video"
 
 module Funky

@@ -1,3 +1,6 @@
+require 'funky/html/page'
+require 'funky/html/parser'
+
 module Funky
   class Video
     attr_reader :data
@@ -34,22 +37,22 @@ module Funky
 
     # @return [Integer] the total number of likes for the video.
     def like_count
-      scraper.likes
+      @html_parser.likes
     end
 
     # @return [Integer] the total number of comments for the video.
     def comment_count
-      scraper.comments
+      @html_parser.comments
     end
 
     # @return [Integer] the total number of shares for the video.
     def share_count
-      scraper.shares
+      @html_parser.shares
     end
 
     # @return [Integer] the total number of views for the video.
     def view_count
-      scraper.views
+      @html_parser.views
     end
 
     # Fetches the data from Facebook's APIs and instantiates the data
@@ -80,18 +83,16 @@ module Funky
     #   and encapsulated into a Funky::Video object.
     def self.find(video_id)
       video = new('id' => video_id)
-      if video.view_count
-        video
-      else
-        raise ContentNotFound, 'Please double check the ID and try again.'
-      end
+      video.fetch_counters!
+      video
+    end
+
+    def fetch_counters!
+      html_page = HTML::Page.new(video_id: id).get
+      @html_parser = HTML::Parser.new html: html_page
     end
 
   private
-
-    def scraper
-      @scraper ||= Scraper.new id
-    end
 
     def self.fetch_and_parse_data(ids)
       if ids.is_a?(Array) && ids.size > 1

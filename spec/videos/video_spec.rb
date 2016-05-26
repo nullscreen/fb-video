@@ -19,6 +19,13 @@ describe 'Video' do
       it { expect(video.picture).to be_a(String)}
     end
 
+    context 'given one unknown video ID was passed' do
+      let(:video_ids) {unknown_video_id}
+      let(:video) {videos.first}
+
+      it { expect{video.id}.to raise_error(Funky::ContentNotFound) }
+    end
+
     context 'given multiple existing video IDs were passed' do
       let(:video_ids) { [existing_video_id, another_video_id] }
       specify 'returns one video for each id, in the same order provided' do
