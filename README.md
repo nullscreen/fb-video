@@ -18,6 +18,12 @@ This is still a very early version, and it currently can only retrieve certain F
 
 ### Configuring Funky
 
+First, add funky to your Gemfile:
+
+```ruby
+gem 'funky'
+```
+
 Funky will require an App ID and an App Secret which you can obtain after registering as a developer on [Facebook for developers](https://developers.facebook.com/).
 
 There are two ways to configure Funky with your App ID and App Secret:
