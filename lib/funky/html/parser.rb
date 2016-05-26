@@ -1,4 +1,5 @@
 module Funky
+  # @api private
   module HTML
     class Parser
       def parse(html:)

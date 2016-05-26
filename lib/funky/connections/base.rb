@@ -1,4 +1,5 @@
 module Funky
+  # @api private
   module Connection
     class Base
 

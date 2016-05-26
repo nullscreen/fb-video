@@ -2,6 +2,7 @@ require 'funky/connections/base'
 require 'json'
 
 module Funky
+  # @api private
   module Connection
     class API < Base
       def self.request(id:, fields:)

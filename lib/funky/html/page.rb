@@ -1,4 +1,5 @@
 module Funky
+  # @api private
   module HTML
     class Page
       def get(video_id:)
