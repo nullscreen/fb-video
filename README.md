@@ -1,23 +1,57 @@
 # Funky
 
-Under the hood, Funky hits Facebook's APIs on some cases, while other cases it will scrape Facebook's HTML to get the data. It's kind of... funky.
+Funky is a Ruby library to fetch data about videos posted an Facebook, such as their title, description, number of views, comments, shares, and likes.
 
-A lot of data that are made public on Facebook's various posts are strangely not available from Facebook's Graph API without very specific permissions. For example, even though the number of shares and views are shown publicly in the web page, the Graph API will not return those results unless the user has insight permissions for that video. Funky can get around that limitation by scraping HTML. While where possible, it will use Facebook's Graph API.
+## How it works
+
+Funky can get *public* Facebook video data whether the Graphi API requires insight permission or not. For example, even though the number of shares and views are shown publicly on the web page, the Graph API will not return those results unless the user has insight permission for that video. Using Funky, you can obtain the number of shares and views without insight permissions.
+
+Under the hood, Funky hits Facebook's APIs on some cases, while other cases it will scrape Facebook's HTML to get the data. It's kind of... funky.
 
 ## Usage
 
 This is still a very early version, and it currently can only retrieve certain Facebook video data.
+
+### Configuring Funky
+
+Funky will require an App ID and an App Secret which you can obtain after registering as a developer on [Facebook for developers](https://developers.facebook.com/).
+
+There are two ways to configure Funky with your App ID and App Secret:
+
+1. By default, Funky will look for the environment variables called `FB_APP_ID` and `FB_APP_SECRET`. You can put those keys in your `.bash_profile` and Funky will work.
+
+    ```
+    export FB_APP_ID="YourAppID"
+    export FB_APP_SECRET="YourAppSecret"
+    ```
+
+2. If you're using this in Rails, you can choose to create an initializer instead and configure the App ID and App Secret like so:
+
+    ```ruby
+    Funky.configure do |config|
+      config.app_id = 'YourAppID'
+      config.app_secret = 'YourAppSecret'
+    end
+    ```
+    Or with environment variables (which is safer) like so:
+
+    ```ruby
+    Funky.configure do |config|
+      config.app_id = ENV['FB_APP_ID']
+      config.app_secret = ENV['FB_APP_SECRET']
+    end
+    ```
 
 ### Use #where clause to get an array of videos
 
 ```ruby
 ids = ['10154439119663508', '10153834590672139']
 videos = Funky::Video.where(id: ids)
-videos.first.id            #=> '10154439119663508'
-videos.first.created_time  #=> #<DateTime: 2015-12-17T06:29:48+00:00>
-videos.first.description   #=> "Hugh Jackman coaches Great Britain's..."
-videos.first.length        #=> 147.05
-videos.first.picture       #=> "https://scontent.xx.fbcdn.net/v/..."
+videos.first.id            # => '10154439119663508'
+videos.first.created_time  # => #<DateTime: 2015-12-17T06:29:48+00:00>
+videos.first.description   # => "Hugh Jackman coaches Great Britain's..."
+videos.first.length        # => 147.05
+videos.first.picture       # => "https://scontent.xx.fbcdn.net/v/..."
 
 ```
 
@@ -26,36 +60,36 @@ If a non-existing video ID is passed into the where clause, it is ignored. Other
 ```ruby
 ids = ['10154439119663508', '10153834590672139', 'doesnotexist']
 videos = Funky::Video.where(id: ids)
-videos.count    #=> 2
-videos.first.id #=> '10154439119663508'
-videos.last.id  #=> '10153834590672139'
+videos.count    # => 2
+videos.first.id # => '10154439119663508'
+videos.last.id  # => '10153834590672139'
 ```
 
 ### Use #find to get a single video
 
 ```ruby
 video = Funky::Video.find('10154439119663508')
-video.id            #=> '10154439119663508'
-video.like_count    #=> 1169
-video.comment_count #=> 65
-video.share_count   #=> 348
-video.view_count    #=> 10121
+video.id            # => '10154439119663508'
+video.like_count    # => 1169
+video.comment_count # => 65
+video.share_count   # => 348
+video.view_count    # => 10121
 ```
 
 If a non-existing video ID is passed into #find, Funky::ContentNotFound will be raised.
 
 ```ruby
-Funky::Video.find('doesnotexist') #=> Funky::ContentNotFound
+Funky::Video.find('doesnotexist') # => raises Funky::ContentNotFound
 ```
 
 ### Connection error
 
-Should there be a case where Funky is unable to connect to facebook, `Funky::ConnectionError` will be raised.
+Should there be a case where Funky is unable to connect to Facebook, `Funky::ConnectionError` will be raised.
 
 ```ruby
-# Given funky is unable to establish a connection to facebook
-Funky::Video.find('10154439119663508') #=> Funky::ConnectionError
-Funky::Video.where(id: '10154439119663508') #=> Funky::ConnectionError
+# Given funky is unable to establish a connection to Facebook
+Funky::Video.find('10154439119663508') # => raises Funky::ConnectionError
+Funky::Video.where(id: '10154439119663508') # => raises Funky::ConnectionError
 ```
 
 ## Development

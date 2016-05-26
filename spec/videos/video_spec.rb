@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'Video' do
   let(:existing_video_id) { '1042790765791228' }
   let(:unknown_video_id) { 'does-not-exist' }
-  let(:another_video_id) { '1042790765791228' }
+  let(:another_video_id) { '903078593095780' }
 
   describe '.where(id: video_ids)' do
     let(:videos) { Funky::Video.where(id: video_ids) }
