@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/Fullscreen/funky.svg?branch=master)](https://travis-ci.org/Fullscreen/funky)
+[![Coverage Status](https://coveralls.io/repos/github/Fullscreen/funky/badge.svg?branch=master)](https://coveralls.io/github/Fullscreen/funky?branch=master)
 
 # Funky
 
