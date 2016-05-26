@@ -19,6 +19,13 @@ describe 'Video' do
       it { expect(video.picture).to be_a(String)}
     end
 
+    context 'given one unknown video ID was passed' do
+      let(:video_ids) {unknown_video_id}
+      let(:video) {videos.first}
+
+      it { expect{video.id}.to raise_error(Funky::ContentNotFound) }
+    end
+
     context 'given multiple existing video IDs were passed' do
       let(:video_ids) { [existing_video_id, another_video_id] }
       specify 'returns one video for each id, in the same order provided' do
@@ -36,9 +43,9 @@ describe 'Video' do
 
     context 'given a Faraday::ConnectionFailed error' do
       let(:video_ids) { [existing_video_id, another_video_id] }
-      let(:connection_failed) { Faraday::ConnectionFailed.new 'nothing' }
+      let(:socket_error) { SocketError.new }
 
-      before { expect(Faraday).to(receive(:new).and_raise connection_failed) }
+      before { expect(Net::HTTP).to(receive(:start).and_raise socket_error) }
 
       it { expect { videos }.to raise_error(Funky::ConnectionError) }
     end

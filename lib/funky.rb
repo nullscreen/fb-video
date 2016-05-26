@@ -1,9 +1,9 @@
 require 'date'
 require "funky/version"
-require 'koala'
 require 'funky/errors'
+require 'net/http'
+require 'funky/connections/api'
 require 'funky/configuration'
-require 'funky/scraper'
 require "funky/video"
 
 module Funky
