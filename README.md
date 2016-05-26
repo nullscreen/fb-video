@@ -16,13 +16,14 @@ Under the hood, Funky hits Facebook's APIs on some cases, while other cases it w
 
 This is still a very early version, and it currently can only retrieve certain Facebook video data.
 
-### Configuring Funky
+### Installing and Configuring Funky
 
 First, add funky to your Gemfile:
 
 ```ruby
 gem 'funky'
 ```
+Then run `bundle install`.
 
 Funky will require an App ID and an App Secret which you can obtain after registering as a developer on [Facebook for developers](https://developers.facebook.com/).
 
