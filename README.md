@@ -12,6 +12,36 @@ Under the hood, Funky hits Facebook's APIs on some cases, while other cases it w
 
 This is still a very early version, and it currently can only retrieve certain Facebook video data.
 
+### Configuring Funky
+
+Funky will require an App ID and an App Secret which you can obtain after registering as a developer on [Facebook for developers](https://developers.facebook.com/).
+
+There are two ways to configure Funky with your App ID and App Secret:
+
+1. By default, Funky will look for the environment variables called `FB_APP_ID` and `FB_APP_SECRET`. You can put those keys in your `.bash_profile` and Funky will work.
+
+    ```
+    export FB_APP_ID="YourAppID"
+    export FB_APP_SECRET="YourAppSecret"
+    ```
+
+2. If you're using this in Rails, you can choose to create an initializer instead and configure the App ID and App Secret like so:
+
+    ```ruby
+    Funky.configure do |config|
+      config.app_id = 'YourAppID'
+      config.app_secret = 'YourAppSecret'
+    end
+    ```
+    Or with environment variables (which is safer) like so:
+
+    ```ruby
+    Funky.configure do |config|
+      config.app_id = ENV['FB_APP_ID']
+      config.app_secret = ENV['FB_APP_SECRET']
+    end
+    ```
+
 ### Use #where clause to get an array of videos
 
 ```ruby
