@@ -58,10 +58,10 @@ module Funky
     #
     # @example Getting one video
     #   id = '10153834590672139'
-    #   Funky::Video.where(id: id) #=> [#<Funky::Video>]
+    #   Funky::Video.where(id: id) # => [#<Funky::Video>]
     # @example Getting multiple videos
     #   ids = ['10154439119663508', '10153834590672139']
-    #   Funky::Video.where(id: ids) #=> [#<Funky::Video>, #<Funky::Video>]
+    #   Funky::Video.where(id: ids) # => [#<Funky::Video>, #<Funky::Video>]
     #
     # @return [Array<Funky::Video>] multiple instances of Funky::Video objects
     #   containing data obtained by Facebook's APIs.
@@ -74,7 +74,7 @@ module Funky
     # into a single Funky::Video object. It can accept one only video ID.
     #
     # @example Getting a video
-    #   Funky::Video.find('10153834590672139') #=> #<Funky::Video>
+    #   Funky::Video.find('10153834590672139') # => #<Funky::Video>
     #
     # @return [Funky::Video] the data scraped from Facebook's HTML
     #   and encapsulated into a Funky::Video object.

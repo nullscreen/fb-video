@@ -13,11 +13,11 @@ This is still a very early version, and it currently can only retrieve certain F
 ```ruby
 ids = ['10154439119663508', '10153834590672139']
 videos = Funky::Video.where(id: ids)
-videos.first.id            #=> '10154439119663508'
-videos.first.created_time  #=> #<DateTime: 2015-12-17T06:29:48+00:00>
-videos.first.description   #=> "Hugh Jackman coaches Great Britain's..."
-videos.first.length        #=> 147.05
-videos.first.picture       #=> "https://scontent.xx.fbcdn.net/v/..."
+videos.first.id            # => '10154439119663508'
+videos.first.created_time  # => #<DateTime: 2015-12-17T06:29:48+00:00>
+videos.first.description   # => "Hugh Jackman coaches Great Britain's..."
+videos.first.length        # => 147.05
+videos.first.picture       # => "https://scontent.xx.fbcdn.net/v/..."
 
 ```
 
@@ -26,26 +26,26 @@ If a non-existing video ID is passed into the where clause, it is ignored. Other
 ```ruby
 ids = ['10154439119663508', '10153834590672139', 'doesnotexist']
 videos = Funky::Video.where(id: ids)
-videos.count    #=> 2
-videos.first.id #=> '10154439119663508'
-videos.last.id  #=> '10153834590672139'
+videos.count    # => 2
+videos.first.id # => '10154439119663508'
+videos.last.id  # => '10153834590672139'
 ```
 
 ### Use #find to get a single video
 
 ```ruby
 video = Funky::Video.find('10154439119663508')
-video.id            #=> '10154439119663508'
-video.like_count    #=> 1169
-video.comment_count #=> 65
-video.share_count   #=> 348
-video.view_count    #=> 10121
+video.id            # => '10154439119663508'
+video.like_count    # => 1169
+video.comment_count # => 65
+video.share_count   # => 348
+video.view_count    # => 10121
 ```
 
 If a non-existing video ID is passed into #find, Funky::ContentNotFound will be raised.
 
 ```ruby
-Funky::Video.find('doesnotexist') #=> Funky::ContentNotFound
+Funky::Video.find('doesnotexist') # => raises Funky::ContentNotFound
 ```
 
 ### Connection error
@@ -54,8 +54,8 @@ Should there be a case where Funky is unable to connect to facebook, `Funky::Con
 
 ```ruby
 # Given funky is unable to establish a connection to facebook
-Funky::Video.find('10154439119663508') #=> Funky::ConnectionError
-Funky::Video.where(id: '10154439119663508') #=> Funky::ConnectionError
+Funky::Video.find('10154439119663508') # => raises Funky::ConnectionError
+Funky::Video.where(id: '10154439119663508') # => raises Funky::ConnectionError
 ```
 
 ## Development
