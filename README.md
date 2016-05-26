@@ -50,10 +50,10 @@ Funky::Video.find('doesnotexist') # => raises Funky::ContentNotFound
 
 ### Connection error
 
-Should there be a case where Funky is unable to connect to facebook, `Funky::ConnectionError` will be raised.
+Should there be a case where Funky is unable to connect to Facebook, `Funky::ConnectionError` will be raised.
 
 ```ruby
-# Given funky is unable to establish a connection to facebook
+# Given funky is unable to establish a connection to Facebook
 Funky::Video.find('10154439119663508') # => raises Funky::ConnectionError
 Funky::Video.where(id: '10154439119663508') # => raises Funky::ConnectionError
 ```
