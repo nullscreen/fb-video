@@ -2,7 +2,7 @@
 
 # Funky
 
-Funky is a Ruby library to fetch data about videos posted an Facebook, such as their title, description, number of views, comments, shares, and likes.
+Funky is a Ruby library to fetch data about videos posted on Facebook, such as their title, description, number of views, comments, shares, and likes.
 
 ## How it works
 
