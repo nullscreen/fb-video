@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Philip Nguyen"]
   spec.email         = ["philip.nguyen@fullscreen.net"]
 
-  spec.summary       = %q{Facebook API + Scraping tool}
-  spec.description   = %q{This gem provides a ruby wrapper over Facebook's API. Where it is not possible to get data over Facebook's default API, it will scrape the data from the HTML.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = "Funky is a Ruby library to fetch video data."
+  spec.description   = "Funky is a Ruby library to fetch data about videos posted an Facebook, such as their title, description, number of views, comments, shares, and likes. Funky can obtain those public data regardless of whether you have insight permission. Funky is fully tested."
+  spec.homepage      = "https://github.com/Fullscreen/funky"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
