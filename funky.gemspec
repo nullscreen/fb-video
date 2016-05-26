@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["philip.nguyen@fullscreen.net"]
 
   spec.summary       = "Funky is a Ruby library to fetch video data."
-  spec.description   = "Funky is a Ruby library to fetch data about videos posted an Facebook, such as their title, description, number of views, comments, shares, and likes. Funky can obtain those public data regardless of whether you have insight permission. Funky is fully tested."
+  spec.description   = "Funky is a Ruby library to fetch data about videos posted on Facebook, such as their title, description, number of views, comments, shares, and likes. Funky can obtain those public data regardless of whether you have insight permission. Funky is fully tested."
   spec.homepage      = "https://github.com/Fullscreen/funky"
   spec.license       = "MIT"
 
