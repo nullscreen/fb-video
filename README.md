@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Fullscreen/funky.svg?branch=master)](https://travis-ci.org/Fullscreen/funky)
+
 # Funky
 
 Funky is a Ruby library to fetch data about videos posted an Facebook, such as their title, description, number of views, comments, shares, and likes.
