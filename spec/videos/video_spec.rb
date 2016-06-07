@@ -70,6 +70,12 @@ describe 'Video' do
       it { expect {video}.to raise_error(Funky::ContentNotFound) }
     end
 
+    context 'given a video ID with the cumulative views was passed' do
+      let(:video_id) { '203203106739575' }
+
+      it { expect(video.view_count).to be_an(Integer) }
+    end
+
     context 'given a SocketError' do
       let(:video_id) { existing_video_id }
       let(:socket_error) { SocketError.new }
