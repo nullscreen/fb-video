@@ -73,7 +73,9 @@ describe 'Video' do
     context 'given a video ID with the cumulative views was passed' do
       let(:video_id) { '203203106739575' }
 
-      it { expect(video.view_count).to be_an(Integer) }
+      it 'only returns the views from this post (not cumulative ones)' do
+        expect(video.view_count).to be > 50_000_000
+      end
     end
 
     context 'given a SocketError' do
