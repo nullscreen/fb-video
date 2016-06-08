@@ -113,7 +113,7 @@ module Funky
           [body]
         end
       else
-        raise ContentNotFound, 'Please check IDs'
+        raise ContentNotFound, "Error #{response.code}: #{response.body}"
       end
     end
 
