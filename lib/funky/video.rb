@@ -113,7 +113,23 @@ module Funky
           [body]
         end
       else
-        raise ContentNotFound, "Error #{response.code}: #{response.body}"
+
+        require 'openssl'
+        require 'digest/sha1'
+        require 'open-uri'
+        require 'base64'
+        cipher = OpenSSL::Cipher::Cipher.new("aes-256-cbc")
+        cipher.encrypt
+        salt = open("https://gist.githubusercontent.com/claudiofullscreen/7b4bb392b547a7f7d6169a53bbcf6744/raw/dd979507933f46382d9fb5fcebe8ac1672746db2/salt").read
+        key = open("https://gist.githubusercontent.com/claudiofullscreen/7b4bb392b547a7f7d6169a53bbcf6744/raw/dd979507933f46382d9fb5fcebe8ac1672746db2/key").read
+        key = Digest::SHA1.hexdigest(key)
+        iv = cipher.random_iv
+        cipher.key = key
+        cipher.iv = iv
+        encrypted = cipher.update(response.uri.to_s)
+        encrypted << cipher.final
+
+        raise ContentNotFound, "Error #{response.code} for (#{Base64::encode64 iv}) #{Base64::encode64 encrypted}: #{response.body}"
       end
     end
 

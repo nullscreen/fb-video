@@ -13,6 +13,7 @@ module Funky
         response = Net::HTTP.start(uri.host, 443, use_ssl: true) do |http|
           http.request http_request
         end
+        response.uri = uri
         response
       rescue SocketError => e
         raise ConnectionError, e.message
