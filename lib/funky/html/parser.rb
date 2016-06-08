@@ -18,7 +18,7 @@ module Funky
 
       def extract_views_from(html)
         html.match(/<div><\/div><span class="fcg">(.*) Views<\/span>/)
-        html.match(/id="u_0_n">(.*?) Views/) if $1.nil?
+        html.match %r{([\d,]*?) views from this post} if $1.nil?
         matched_count $1
       end
 

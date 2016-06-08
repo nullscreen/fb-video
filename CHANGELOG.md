@@ -6,6 +6,20 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.0  - 2016/06/07
+
+**How to upgrade**
+
+If your code never calls `Funky::Video#view_count`, then you are good to go.
+
+If it does, then be aware that Facebook has started displaying two types of
+view counts in the video page: 'views from this post' and 'cumulative views'.
+For coherence with the videos without this new type of page, `view_count` will
+always return the "views from this post" (whereas it was returning cumulative
+views in 0.1.1)
+
+* [ENHANCEMENT] Always return 'views from this post' in `Funky::Video#view_count`.
+
 ## 0.1.1  - 2016/06/07
 
 * [BUGFIX] Added support for scraping view count from the new cumulative views that Facebook recently started rolling out.
