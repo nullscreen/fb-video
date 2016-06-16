@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'videos/shared/examples'
 
 describe 'Video' do
   let(:existing_video_id) { '1042790765791228' }
@@ -57,34 +58,55 @@ describe 'Video' do
     context 'given an existing video ID was passed' do
       let(:video_id) { existing_video_id }
 
-      it { expect(video.id).to be_a(String) }
-      it { expect(video.like_count).to be_an(Integer) }
-      it { expect(video.comment_count).to be_an(Integer) }
-      it { expect(video.share_count).to be_an(Integer) }
-      it { expect(video.view_count).to be_an(Integer) }
+      include_examples 'check id and counters'
     end
 
     context 'given a non-existing video ID was passed' do
       let(:video_id) { unknown_video_id }
 
-      it { expect {video}.to raise_error(Funky::ContentNotFound) }
+      include_examples 'non-existing video'
     end
 
     context 'given a video ID with the cumulative views was passed' do
       let(:video_id) { '203203106739575' }
 
-      it 'only returns the views from this post (not cumulative ones)' do
-        expect(video.view_count).to be > 50_000_000
-      end
+      include_examples 'cumulative views'
     end
 
     context 'given a SocketError' do
       let(:video_id) { existing_video_id }
-      let(:socket_error) { SocketError.new }
 
-      before { expect(Net::HTTP).to(receive(:start).and_raise socket_error) }
+      include_examples 'socket error'
+    end
+  end
 
-      it { expect { video }.to raise_error(Funky::ConnectionError) }
+  describe '.find_by_url!(url)' do
+    let(:video) {Funky::Video.find_by_url! url}
+
+    context "given an existing video url" do
+      let(:video_id) { '965037490222386' }
+      let(:url) { "facebook.com/videos.php?v=#{video_id}" }
+
+      include_examples 'check id and counters'
+    end
+
+
+    context 'given a non-existing video url was passed' do
+      let(:url) { 'https://www.facebook.com/video.php?v=doesnotexist'}
+
+      include_examples 'non-existing video'
+    end
+
+    context 'given a video url with cumulative views was passed' do
+      let(:url) { 'https://www.facebook.com/video.php?v=203203106739575' }
+
+      include_examples 'cumulative views'
+    end
+
+    context 'given a SocketError' do
+      let(:url) { 'https://www.facebook.com/video.php?v=1559182744389118' }
+
+      include_examples 'socket error'
     end
   end
 end
