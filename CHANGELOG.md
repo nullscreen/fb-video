@@ -6,6 +6,15 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.1  - 2016/06/16
+
+* [FEATURE] Add method to find video by url, `Funky::Video.find_by_url!(url)`.
+The following URL formats are currently supported:
+- `https://www.facebook.com/{page_name}/videos/vb.{alt_page_id}/{video_id}/`
+- `https://www.facebook.com/{page_name}/videos/{video_id}/`
+- `https://www.facebook.com/{page_id}/videos/{video_id}/`
+- `https://www.facebook.com/video.php?v={video_id}`
+
 ## 0.2.0  - 2016/06/07
 
 **How to upgrade**
