@@ -6,6 +6,11 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.2 - 2016/06/17
+
+* [BUGFIX] Single video id passed to the `Funky::Video.where` clause will not
+error even if the response is not 200. It would return an empty array.
+
 ## 0.2.1  - 2016/06/16
 
 * [FEATURE] Add method to find video by url, `Funky::Video.find_by_url!(url)`.
