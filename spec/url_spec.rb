@@ -11,16 +11,18 @@ describe Funky::URL do
   it 'parses any valid URL format for a Facebook video' do
     # Possible formats
     parses "facebook.com/PAGE_NAME/videos/vb.PAGE_ID/#{video_id}"
+    parses "facebook.com/PAGE_NAME/videos/vl.PAGE_ID/#{video_id}"
     parses "facebook.com/PAGE_NAME/videos/#{video_id}"
     parses "facebook.com/PAGE_ID/videos/#{video_id}"
     parses "facebook.com/video.php?v=#{video_id}"
 
     # Possible variants
+    parses "facebook.com/PAGE_NAME/videos/vl.PAGE_ID/#{video_id}/?type=1"
     parses "facebook.com/video.php?v=#{video_id}/"
     parses "www.facebook.com/video.php?v=#{video_id}"
     parses "http://facebook.com/video.php?v=#{video_id}"
     parses "https://facebook.com/video.php?v=#{video_id}"
     parses "http://www.facebook.com/video.php?v=#{video_id}"
-    parses "https://wwwfacebook.com/video.php?v=#{video_id}"
+    parses "https://www.facebook.com/video.php?v=#{video_id}"
   end
 end
