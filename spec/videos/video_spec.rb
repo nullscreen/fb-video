@@ -22,9 +22,8 @@ describe 'Video' do
 
     context 'given one unknown video ID was passed' do
       let(:video_ids) {unknown_video_id}
-      let(:video) {videos.first}
 
-      it { expect{video.id}.to raise_error(Funky::ContentNotFound) }
+      it { expect(videos).to be_empty }
     end
 
     context 'given multiple existing video IDs were passed' do

@@ -116,6 +116,8 @@ module Funky
         response = Connection::API.request(id: id, fields: fields)
       end
       parse response
+    rescue ContentNotFound
+      []
     end
 
     def self.parse(response)
