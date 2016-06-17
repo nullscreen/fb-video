@@ -1,5 +1,6 @@
 require 'funky/html/page'
 require 'funky/html/parser'
+require 'funky/url'
 
 module Funky
   class Video
@@ -88,6 +89,21 @@ module Funky
     def self.find(video_id)
       counters = @@html_parser.parse html: @@html_page.get(video_id: video_id)
       new counters.merge(id: video_id)
+    end
+
+    # Similar to #find, but it finds the video by url instead of video id.
+    # Fetches the data from Facebook's HTML and instantiates the data
+    # into a single Funky::Video object. It can accept one only video url.
+    #
+    # @example Getting a video by url
+    #   url = 'https://www.facebook.com/video.php?v=203203106739575'
+    #   Funky::Video.find_by_url!(url) # => #<Funky::Video>
+    #
+    # @return [Funky::Video] the data scraped from Facebook's HTML
+    #   and encapsulated into a Funky::Video object.
+    def self.find_by_url!(url)
+      url = URL.new(url)
+      find(url.video_id)
     end
 
   private

@@ -95,6 +95,32 @@ If a non-existing video ID is passed into #find, Funky::ContentNotFound will be 
 Funky::Video.find('doesnotexist') # => raises Funky::ContentNotFound
 ```
 
+### Use #find_by_url!(url) to get a single video from a url
+
+```ruby
+video = Funky::Video.find_by_url!('https://www.facebook.com/video.php?v=10154439119663508')
+video.id            # => '10154439119663508'
+video.like_count    # => 1169
+video.comment_count # => 65
+video.share_count   # => 348
+video.view_count    # => 10121
+```
+
+If a non-existing video url is passed into #find_by, Funky::ContentNotFound will be raised.
+
+```ruby
+Funky::Video.find_by_url!('https://www.facebook.com/video.php?v=doesnotexist')
+  # => raises Funky::ContentNotFound
+```
+
+The current URL formats are supported:
+
+- `https://www.facebook.com/{page_name}/videos/vb.{alt_page_id}/{video_id}`
+- `https://www.facebook.com/{page_name}/videos/{video_id}`
+- `https://www.facebook.com/{page_id}/videos/{video_id}`
+- `https://www.facebook.com/video.php?v={video_id}`
+
+
 ### Connection error
 
 Should there be a case where Funky is unable to connect to Facebook, `Funky::ConnectionError` will be raised.
