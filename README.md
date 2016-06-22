@@ -65,6 +65,7 @@ videos.first.created_time  # => #<DateTime: 2015-12-17T06:29:48+00:00>
 videos.first.description   # => "Hugh Jackman coaches Great Britain's..."
 videos.first.length        # => 147.05
 videos.first.picture       # => "https://scontent.xx.fbcdn.net/v/..."
+videos.first.page_name     # => "Moviefone"
 
 ```
 
