@@ -40,6 +40,11 @@ module Funky
       data[:picture]
     end
 
+    # @return [String] the name of Facebook page for the video.
+    def page_name
+      data.fetch(:from)[:name]
+    end
+
     # @return [Integer] the total number of likes for the video.
     def like_count
       data[:like_count]
@@ -144,6 +149,7 @@ module Funky
         'created_time',
         'description',
         'length',
+        'from',
         'picture'
       ]
     end
