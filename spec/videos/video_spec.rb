@@ -18,6 +18,7 @@ describe 'Video' do
       it { expect(video.description).to be_a(String) }
       it { expect(video.length).to be_a(Float) }
       it { expect(video.picture).to be_a(String)}
+      it { expect(video.page_name).to be_a(String) }
     end
 
     context 'given one unknown video ID was passed' do
