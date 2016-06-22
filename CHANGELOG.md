@@ -6,6 +6,10 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.3 - 2016/06/22
+
+* [FEATURE] Add `page_name` of a video found by API call (which is `Funky::Video.where`)
+
 ## 0.2.2 - 2016/06/17
 
 * [BUGFIX] Single video id passed to the `Funky::Video.where` clause will not
