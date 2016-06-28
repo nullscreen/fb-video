@@ -46,14 +46,6 @@ There are two ways to configure Funky with your App ID and App Secret:
       config.app_secret = 'YourAppSecret'
     end
     ```
-    Or with environment variables (which is safer) like so:
-
-    ```ruby
-    Funky.configure do |config|
-      config.app_id = ENV['FB_APP_ID']
-      config.app_secret = ENV['FB_APP_SECRET']
-    end
-    ```
 
 ### Use #where clause to get an array of videos
 
@@ -107,7 +99,7 @@ video.share_count   # => 348
 video.view_count    # => 10121
 ```
 
-If a non-existing video url is passed into #find_by, Funky::ContentNotFound will be raised.
+If a non-existing video url is passed into #find_by_url!, Funky::ContentNotFound will be raised.
 
 ```ruby
 Funky::Video.find_by_url!('https://www.facebook.com/video.php?v=doesnotexist')
