@@ -6,6 +6,10 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.4 - 2016/06/28
+
+* [ENHANCEMENT] Change the way views are scraped from a Facebook page, by not depending the regex on the word "Views". This has the added benefit of being able to scrape the Facebook pages that are not just in English, but also in Hebrew. Potentially, it could scrape from other languages too, but that is  speculation for now.
+
 ## 0.2.3 - 2016/06/22
 
 * [FEATURE] Add `page_name` of a video found by API call (which is `Funky::Video.where`)
