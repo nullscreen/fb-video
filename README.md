@@ -10,7 +10,7 @@ Funky is a Ruby library to fetch data about videos posted on Facebook, such as t
 
 ## How it works
 
-Funky can get *public* Facebook video data whether the Graphi API requires insight permission or not. For example, even though the number of shares and views are shown publicly on the web page, the Graph API will not return those results unless the user has insight permission for that video. Using Funky, you can obtain the number of shares and views without insight permissions.
+Funky can get *public* Facebook video data whether the Graph API requires insight permission or not. For example, even though the number of shares and views are shown publicly on the web page, the Graph API will not return those results unless the user has insight permission for that video. Using Funky, you can obtain the number of shares and views without insight permissions.
 
 Under the hood, Funky hits Facebook's APIs on some cases, while other cases it will scrape Facebook's HTML to get the data. It's kind of... funky.
 
