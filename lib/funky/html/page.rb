@@ -26,7 +26,7 @@ module Funky
       def uri_for(video_id)
         URI::HTTPS.build host:  'www.facebook.com',
                          path:  '/video.php',
-                         query: "v=#{video_id}"
+                         query: "v=#{video_id}&locale=en_US"
       end
     end
   end
