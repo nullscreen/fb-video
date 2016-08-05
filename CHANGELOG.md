@@ -6,6 +6,10 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.6 - 2016/08/05
+
+* [BUGFIX] Force scraping to use English-US version of Facebook by appending `locale=en_US` to the query string. This prevents cases where Funky's requests originate from non English speaking countries and receiving different HTML templates.
+
 ## 0.2.5 - 2016/07/25
 
 * [ENHANCEMENT] Allow Funky to also scrape view count that uses dot delimiters. Previously, it only scraped view count with comma delimiters.
