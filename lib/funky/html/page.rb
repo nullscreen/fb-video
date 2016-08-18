@@ -19,7 +19,7 @@ module Funky
         Net::HTTP.start(uri.host, 443, use_ssl: true) do |http|
           http.request request
         end
-      rescue SocketError => e
+      rescue *server_errors => e
         raise ConnectionError, e.message
       end
 
@@ -27,6 +27,18 @@ module Funky
         URI::HTTPS.build host:  'www.facebook.com',
                          path:  '/video.php',
                          query: "v=#{video_id}&locale=en_US"
+      end
+
+      def server_errors
+        [
+          OpenSSL::SSL::SSLError,
+          Errno::ETIMEDOUT,
+          Errno::EHOSTUNREACH,
+          Errno::ENETUNREACH,
+          Errno::ECONNRESET,
+          Net::OpenTimeout,
+          SocketError
+        ]
       end
     end
   end

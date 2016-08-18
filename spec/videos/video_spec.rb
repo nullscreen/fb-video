@@ -73,10 +73,10 @@ describe 'Video' do
       include_examples 'cumulative views'
     end
 
-    context 'given a SocketError' do
+    context 'given server errors' do
       let(:video_id) { existing_video_id }
 
-      include_examples 'socket error'
+      include_examples 'server errors'
     end
   end
 
@@ -103,10 +103,10 @@ describe 'Video' do
       include_examples 'cumulative views'
     end
 
-    context 'given a SocketError' do
+    context 'given server errors' do
       let(:url) { 'https://www.facebook.com/video.php?v=1559182744389118' }
 
-      include_examples 'socket error'
+      include_examples 'server errors'
     end
   end
 end
