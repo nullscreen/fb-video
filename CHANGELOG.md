@@ -6,6 +6,17 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.7 - 2016/08/18
+
+* [ENHANCEMENT] When Funky makes a request to an HTML page, Funky would now raise `Funky::ConnectionError` should the following errors occur:
+OpenSSL::SSL::SSLError,
+Errno::ETIMEDOUT,
+Errno::EHOSTUNREACH,
+Errno::ENETUNREACH,
+Errno::ECONNRESET,
+Net::OpenTimeout,
+SocketError
+
 ## 0.2.6 - 2016/08/05
 
 * [BUGFIX] Force scraping to use English-US version of Facebook by appending `locale=en_US` to the query string. This prevents cases where Funky's requests originate from non English speaking countries and receiving different HTML templates.
