@@ -68,7 +68,7 @@ describe 'Video' do
     end
 
     context 'given a video ID with the cumulative views was passed' do
-      let(:video_id) { '203203106739575' }
+      let(:video_id) { '10153924745896633' }
 
       include_examples 'cumulative views'
     end
@@ -98,7 +98,7 @@ describe 'Video' do
     end
 
     context 'given a video url with cumulative views was passed' do
-      let(:url) { 'https://www.facebook.com/video.php?v=203203106739575' }
+      let(:url) { 'https://www.facebook.com/video.php?v=10153924745896633' }
 
       include_examples 'cumulative views'
     end

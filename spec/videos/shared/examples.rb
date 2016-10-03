@@ -27,7 +27,7 @@ end
 
 shared_examples 'cumulative views' do
   it 'only returns the views from this post (not cumulative ones)' do
-    expect(video.view_count).to be > 50_000_000
+    expect(video.view_count).to be > 6_000_000
   end
 end
 
