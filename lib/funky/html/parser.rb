@@ -24,7 +24,7 @@ module Funky
 
       def extract_likes_from(html)
         likes = html.to_enum(:scan, /"likecount":(.*?),/).map { Regexp.last_match }.last
-        likes.nil? ? "0" : likes[1]
+        matched_like_count(likes)
       end
 
       def extract_comments_from(html)
@@ -33,6 +33,10 @@ module Funky
       end
 
     private
+
+      def matched_like_count(matched_likes)
+        matched_likes.nil? ? 0 : matched_likes[1].to_i
+      end
 
       def matched_count(matched)
         matched ? matched.delete(',').to_i : nil

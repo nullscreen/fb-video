@@ -6,6 +6,12 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.8 - 2016/12/12
+
+* [UPDATE] Facebook recently changed its html page structure to include
+  multiple "likecounts". Update the HTML::Parser API to scrape the
+  appropriate data.
+
 ## 0.2.7 - 2016/08/18
 
 * [ENHANCEMENT] When Funky makes a request to an HTML page, Funky would now raise `Funky::ConnectionError` should the following errors occur:
