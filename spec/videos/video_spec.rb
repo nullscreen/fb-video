@@ -61,6 +61,12 @@ describe 'Video' do
       include_examples 'check id and counters'
     end
 
+    context 'given an existing video ID of a video with more than 800 likes was passed' do
+      let(:video_id) { existing_video_id }
+
+      it { expect(video.like_count).to be > 800 }
+    end
+
     context 'given a non-existing video ID was passed' do
       let(:video_id) { unknown_video_id }
 
