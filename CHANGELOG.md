@@ -8,9 +8,7 @@ For more information about changelogs, check
 
 ## 0.2.8 - 2016/12/12
 
-* [UPDATE] Facebook recently changed its html page structure to include
-  multiple "likecounts". Update the HTML::Parser API to scrape the
-  appropriate data.
+* [BUGFIX] Change the way that "like counts" are parsed now that Facebook has changed the structure of the HTML and can include multiple "likecounts" elements in the same page.
 
 ## 0.2.7 - 2016/08/18
 
