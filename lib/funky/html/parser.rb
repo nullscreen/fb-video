@@ -23,8 +23,8 @@ module Funky
       end
 
       def extract_likes_from(html)
-         html.match(/"likecount":(\d+),"likecountreduced"/)
-         matched_count $1
+        html.match(/"likecount":(\d+),"likecountreduced"/)
+        matched_count $1
       end
 
       def extract_comments_from(html)
