@@ -24,5 +24,6 @@ describe Funky::URL do
     parses "https://facebook.com/video.php?v=#{video_id}"
     parses "http://www.facebook.com/video.php?v=#{video_id}"
     parses "https://www.facebook.com/video.php?v=#{video_id}"
+    parses "https://www.facebook.com/PAGE_NAME/videos/#{video_id}/"
   end
 end
