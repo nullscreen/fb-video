@@ -6,6 +6,11 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.9 - 2016/12/13
+
+* [BUGFIX] Allow a video ID to be parsed out of facebook video URLs with 
+trailing slashes.
+
 ## 0.2.8 - 2016/12/12
 
 * [BUGFIX] Change the way that "like counts" are parsed now that Facebook has changed the structure of the HTML and can include multiple "likecounts" elements in the same page.
