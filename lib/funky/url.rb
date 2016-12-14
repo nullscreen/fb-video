@@ -1,7 +1,7 @@
 module Funky
   class URL
     attr_reader :url
-    VIDEO_ID_REGEXES = [/videos\/(\d*)/i, /v=(\d*)/i, /\/v.\..*\/(\d*)\b/i]
+    VIDEO_ID_REGEXES = [/videos\/(\d+)(\/|)/i, /v=(\d*)/i, /\/v.\..*\/(\d*)\b/i]
 
     def initialize(url)
       @url = url
