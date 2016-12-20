@@ -45,6 +45,11 @@ module Funky
       data.fetch(:from)[:name]
     end
 
+    # @return [String] the id of Facebook page for the video.
+    def page_id
+      data.fetch(:from)[:id]
+    end
+
     # @return [Integer] the total number of likes for the video.
     def like_count
       data[:like_count]
