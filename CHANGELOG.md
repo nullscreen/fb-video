@@ -6,7 +6,7 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
-## 0.3.0 - 2016/12/20
+## 0.2.10 - 2016/12/20
 
 * [ENHANCEMENT] Add a facebook page ID as a part of the Funky::Video API
 
