@@ -9,6 +9,7 @@ For more information about changelogs, check
 ## 0.2.10 - 2016/12/20
 
 * [ENHANCEMENT] Add a facebook page ID as a part of the Funky::Video API
+* [ENHANCEMENT] Add a facebook page URL as a part of the Funky::Video API
 
 ## 0.2.9 - 2016/12/13
 

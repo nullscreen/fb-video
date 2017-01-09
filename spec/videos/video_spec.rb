@@ -20,6 +20,7 @@ describe 'Video' do
       it { expect(video.picture).to be_a(String)}
       it { expect(video.page_name).to be_a(String) }
       it { expect(video.page_id).to be_a(String) }
+      it { expect(video.page_url).to be_a(String) }
     end
 
     context 'given one unknown video ID was passed' do
