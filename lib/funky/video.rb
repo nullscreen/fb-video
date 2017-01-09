@@ -51,7 +51,7 @@ module Funky
     end
 
     def page_url
-      "https://www.facebook.com/" + page_id
+      "https://www.facebook.com/#{page_id}"
     end
 
     # @return [Integer] the total number of likes for the video.
