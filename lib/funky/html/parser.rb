@@ -13,6 +13,7 @@ module Funky
 
       def extract_shares_from(html)
         html.match(/"sharecount":(.*?),/)
+        html.match(/sharecount:(\d+),sharecountreduced/) if $1.nil?
         matched_count $1
       end
 
@@ -25,11 +26,13 @@ module Funky
 
       def extract_likes_from(html)
         html.match(/"likecount":(\d+),"likecountreduced"/)
+        html.match(/likecount:(\d+),likecountreduced/) if $1.nil?
         matched_count $1
       end
 
       def extract_comments_from(html)
         html.match /"commentcount":(.*?),/
+        html.match(/commentcount:(\d+),commentcountreduced/) if $1.nil?
         matched_count $1
       end
 
