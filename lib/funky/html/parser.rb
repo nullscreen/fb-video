@@ -2,18 +2,19 @@ module Funky
   # @api private
   module HTML
     class Parser
-      def parse(html:)
+      def parse(html:, video_id:)
         {
           view_count: extract_views_from(html),
-          share_count: extract_shares_from(html),
+          share_count: extract_shares_from(html, video_id),
           like_count: extract_likes_from(html),
-          comment_count: extract_comments_from(html)
+          comment_count: extract_comments_from(html, video_id)
         }
       end
 
-      def extract_shares_from(html)
+      def extract_shares_from(html, video_id)
         html.match(/"sharecount":(.*?),/)
         html.match(/sharecount:(\d+),sharecountreduced/) if $1.nil?
+        html.match(/sharecount:(\d+),.*sharefbid:"#{video_id}"/) if $1.nil?
         matched_count $1
       end
 
@@ -30,9 +31,10 @@ module Funky
         matched_count $1
       end
 
-      def extract_comments_from(html)
+      def extract_comments_from(html, video_id)
         html.match /"commentcount":(.*?),/
         html.match(/commentcount:(\d+),commentcountreduced/) if $1.nil?
+        html.match /commentcount:(\d+),.*commentstargetfbid:"#{video_id}"/ if $1.nil?
         matched_count $1
       end
 

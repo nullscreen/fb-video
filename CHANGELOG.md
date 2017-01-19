@@ -6,6 +6,11 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.12 - 2017/01/19
+
+* [ENHANCEMENT] Parse new format of share & comment count in Facebook HTML
+* [BUGFIX] Fix regular expression for likecount
+
 ## 0.2.11 - 2017/01/19
 
 * [ENHANCEMENT] Follow redirects when Facebook responds with 302
