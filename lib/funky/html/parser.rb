@@ -2,7 +2,11 @@ module Funky
   # @api private
   module HTML
     class Parser
-      def parse(html:)
+
+      attr_reader :video_id
+
+      def parse(html:, video_id:)
+        @video_id = video_id
         {
           view_count: extract_views_from(html),
           share_count: extract_shares_from(html),
@@ -12,7 +16,7 @@ module Funky
       end
 
       def extract_shares_from(html)
-        html.match(/"sharecount":(.*?),/)
+        html.match(/sharecount:(\d+),.*sharefbid:"#{video_id}"/)
         matched_count $1
       end
 
@@ -24,12 +28,12 @@ module Funky
       end
 
       def extract_likes_from(html)
-        html.match(/"likecount":(\d+),"likecountreduced"/)
+        html.match(/likecount:(\d+),likecountreduced/)
         matched_count $1
       end
 
       def extract_comments_from(html)
-        html.match /"commentcount":(.*?),/
+        html.match /commentcount:(\d+),.*commentstargetfbid:"#{video_id}"/
         matched_count $1
       end
 
