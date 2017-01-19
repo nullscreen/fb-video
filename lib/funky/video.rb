@@ -101,7 +101,7 @@ module Funky
     # @return [Funky::Video] the data scraped from Facebook's HTML
     #   and encapsulated into a Funky::Video object.
     def self.find(video_id)
-      counters = @@html_parser.parse html: @@html_page.get(video_id: video_id)
+      counters = @@html_parser.parse html: @@html_page.get(video_id: video_id), video_id: video_id
       new counters.merge(id: video_id)
     end
 
