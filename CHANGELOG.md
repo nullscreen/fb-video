@@ -6,6 +6,11 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.11 - 2017/01/19
+
+* [ENHANCEMENT] Follow redirects when Facebook responds with 302
+* [ENHANCEMENT] Parse new format of view count in Facebook HTML
+
 ## 0.2.10 - 2016/12/20
 
 * [ENHANCEMENT] Add a facebook page ID as a part of the Funky::Video API
@@ -13,7 +18,7 @@ For more information about changelogs, check
 
 ## 0.2.9 - 2016/12/13
 
-* [BUGFIX] Allow a video ID to be parsed out of facebook video URLs with 
+* [BUGFIX] Allow a video ID to be parsed out of facebook video URLs with
 trailing slashes.
 
 ## 0.2.8 - 2016/12/12

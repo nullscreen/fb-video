@@ -16,9 +16,16 @@ module Funky
       def response_for(video_id)
         uri = uri_for video_id
         request = Net::HTTP::Get.new(uri.request_uri)
-        Net::HTTP.start(uri.host, 443, use_ssl: true) do |http|
+        response = Net::HTTP.start(uri.host, 443, use_ssl: true) do |http|
           http.request request
         end
+        if response.is_a? Net::HTTPRedirection
+          request = Net::HTTP::Get.new URI.parse(response.header['location'])
+          response = Net::HTTP.start(uri.host, 443, use_ssl: true) do |http|
+            http.request request
+          end
+        end
+        response
       rescue *server_errors => e
         raise ConnectionError, e.message
       end
