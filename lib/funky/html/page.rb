@@ -2,6 +2,8 @@ module Funky
   # @api private
   module HTML
     class Page
+      attr_reader :video_id
+
       def get(video_id:)
         body = response_for(video_id).body
         if body.include? '<meta name="description"'
