@@ -3,12 +3,7 @@ module Funky
   module HTML
     class Page
       def get(video_id:)
-        body = response_for(video_id).body
-        if body.include? '<meta name="description"'
-          body
-        else
-          raise ContentNotFound, 'Please double check the ID and try again.'
-        end
+        response_for(video_id).body
       end
 
     private
@@ -25,6 +20,10 @@ module Funky
             http.request request
           end
         end
+        if response.is_a? Net::HTTPNotFound
+          raise ContentNotFound, 'Please double check the ID and try again.'
+        end
+
         response
       rescue *server_errors => e
         raise ConnectionError, e.message
