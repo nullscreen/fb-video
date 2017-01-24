@@ -7,7 +7,7 @@ module Funky
     class API < Base
       def self.request(id:, fields:)
         uri = URI::HTTPS.build host: host,
-          path: "/v2.6/#{id}",
+          path: "/v2.8/#{id}",
           query: "access_token=#{app_id}%7C#{app_secret}&fields=#{fields}"
         response_for(get_http_request(uri), uri)
       end
@@ -42,7 +42,7 @@ module Funky
 
       def self.create_batch_for(ids, fields)
         ids.map do |id|
-          {"method":"GET", "relative_url": "/v2.6/#{id}?fields=#{fields}"}
+          {"method":"GET", "relative_url": "/v2.8/#{id}?fields=#{fields}"}
         end
       end
     end
