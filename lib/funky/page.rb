@@ -1,42 +1,47 @@
 module Funky
   class Page
+    extend DataParser
+
+    attr_reader :data
+
+    def initialize(data)
+      @data = data
+    end
+
+    # @return [String] the video ID.
+    def id
+      data[:id]
+    end
+
+    # @return [String] the username.
+    def username
+      data[:username]
+    end
+
+    # @return [String] the name.
+    def name
+      data[:name]
+    end
+
+    # Fetches the data from Facebook's APIs and instantiates the data
+    # into an Array of Funky::Page objects. It can accept one page ID or an
+    # array of multiple page IDs.
+    #
+    # @example Getting one page
+    #   id = '10153834590672139'
+    #   Funky::Page.where(id: id) # => [#<Funky::Page>]
+    # @example Getting multiple videos
+    #   ids = ['10154439119663508', '10153834590672139']
+    #   Funky::Page.where(id: ids) # => [#<Funky::Page>, #<Funky::Page>]
+    #
+    # @return [Array<Funky::Page>] multiple instances of Funky::Page objects
+    #   containing data obtained by Facebook's APIs.
     def self.where(id:)
       return nil unless id
       instantiate_collection(fetch_and_parse_data Array(id))
     end
 
   private
-
-    def self.fetch_and_parse_data(ids)
-      if ids.is_a?(Array) && ids.size > 1
-        response = Connection::API.batch_request(ids: ids, fields: fields)
-      else
-        id = ids.is_a?(Array) ? ids.first : ids
-        response = Connection::API.request(id: id, fields: fields)
-      end
-      parse response
-    rescue ContentNotFound
-      []
-    end
-
-    def self.parse(response)
-      if response.code == '200'
-        body = JSON.parse response.body, symbolize_names: true
-        if body.is_a? Array
-          body.select{|item| item[:code] == 200}.collect do |item|
-            JSON.parse(item[:body], symbolize_names: true)
-          end.compact
-        else
-          [body]
-        end
-      else
-        raise ContentNotFound, "Error #{response.code}: #{response.body}"
-      end
-    end
-
-    def self.instantiate_collection(items)
-      items.collect { |item| new item }
-    end
 
     def self.fields
       [
