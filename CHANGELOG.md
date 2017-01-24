@@ -8,7 +8,10 @@ For more information about changelogs, check
 
 ## 0.2.13 - 2017/01/24
 
-* [ENHANCEMENT] Use 2.8 of Facebook Graph API (upgrade from 2.6)
+* [ENHANCEMENT] Use 2.8 of Facebook Graph API (upgrade from 2.6).
+- There were deprecations in v2.8 of the Facebook Graph API as well as
+additions documented in [the changelog](https://developers.facebook.com/docs/apps/changelog).
+- The current API of Funky is not affected.
 
 ## 0.2.12 - 2017/01/19
 
