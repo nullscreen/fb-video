@@ -1,17 +1,5 @@
 module Funky
-  class Page
-    extend DataParser
-
-    attr_reader :data
-
-    def initialize(data)
-      @data = data
-    end
-
-    # @return [String] the video ID.
-    def id
-      data[:id]
-    end
+  class Page < FunkyObject
 
     # @return [String] the username.
     def username

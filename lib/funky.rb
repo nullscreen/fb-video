@@ -5,6 +5,7 @@ require 'net/http'
 require 'funky/connections/api'
 require 'funky/configuration'
 require "funky/data_parser"
+require "funky/funky_object"
 require "funky/video"
 require "funky/page"
 

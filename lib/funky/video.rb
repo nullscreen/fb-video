@@ -3,23 +3,12 @@ require 'funky/html/parser'
 require 'funky/url'
 
 module Funky
-  class Video
-    extend DataParser
+  class Video < FunkyObject
 
-    attr_reader :data
     attr_accessor :counters
 
     @@html_page = HTML::Page.new
     @@html_parser = HTML::Parser.new
-
-    def initialize(data)
-      @data = data
-    end
-
-    # @return [String] the video ID.
-    def id
-      data[:id]
-    end
 
     # @return [DateTime] the created time of the video.
     def created_time
