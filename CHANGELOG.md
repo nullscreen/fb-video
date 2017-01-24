@@ -6,6 +6,10 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.14 - 2017/01/24
+* [ENHANCEMENT] Add the Funky::Page API to fetch username and name
+  fields from the Facebook Graph API given a page ID
+
 ## 0.2.12 - 2017/01/19
 
 * [ENHANCEMENT] Parse new format of share & comment count in Facebook HTML
