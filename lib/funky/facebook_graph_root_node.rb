@@ -1,6 +1,19 @@
 module Funky
-  module DataParser
-    def fetch_and_parse_data(ids)
+  class FacebookGraphRootNode
+    attr_reader :data
+
+    def initialize(data)
+      @data = data
+    end
+
+    # @return [String] the object ID.
+    def id
+      data[:id]
+    end
+
+  private
+
+    def self.fetch_and_parse_data(ids)
       if ids.is_a?(Array) && ids.size > 1
         response = Connection::API.batch_request(ids: ids, fields: fields)
       else
@@ -12,7 +25,7 @@ module Funky
       []
     end
 
-    def parse(response)
+    def self.parse(response)
       if response.code == '200'
         body = JSON.parse response.body, symbolize_names: true
         if body.is_a? Array
@@ -27,7 +40,7 @@ module Funky
       end
     end
 
-    def instantiate_collection(items)
+    def self.instantiate_collection(items)
       items.collect { |item| new item }
     end
   end

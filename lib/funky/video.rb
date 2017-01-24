@@ -3,7 +3,7 @@ require 'funky/html/parser'
 require 'funky/url'
 
 module Funky
-  class Video < FunkyObject
+  class Video < FacebookGraphRootNode
 
     attr_accessor :counters
 

@@ -1,12 +1,14 @@
 module Funky
-  class Page < FunkyObject
+  class Page < FacebookGraphRootNode
+    # For further detailed documentation, see
+    # https://developers.facebook.com/docs/graph-api/reference/page/
 
-    # @return [String] the username.
+    # @return [String] the name of the Facebook Page.
     def username
       data[:username]
     end
 
-    # @return [String] the name.
+    # @return [String] the username of the Facebook Page.
     def name
       data[:name]
     end
