@@ -4,7 +4,9 @@ require 'funky/errors'
 require 'net/http'
 require 'funky/connections/api'
 require 'funky/configuration'
+require "funky/data_parser"
 require "funky/video"
+require "funky/page"
 
 module Funky
   def self.configuration
