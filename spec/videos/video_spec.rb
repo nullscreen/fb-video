@@ -45,7 +45,7 @@ describe 'Video' do
       end
     end
 
-    context 'given a Faraday::ConnectionFailed error' do
+    context 'given an error that causes a Funky::ConnectionError' do
       let(:video_ids) { [existing_video_id, another_video_id] }
       let(:socket_error) { SocketError.new }
 

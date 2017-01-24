@@ -38,7 +38,7 @@ describe 'Page' do
       end
     end
 
-    context 'given a Faraday::ConnectionFailed error' do
+    context 'given an error that causes a Funky::ConnectionError' do
       let(:page_ids) { [existing_page_id, another_page_id] }
       let(:socket_error) { SocketError.new }
 
