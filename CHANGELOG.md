@@ -6,7 +6,7 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
-## 0.2.13 - 2017/01/24
+## 2017/01/24
 
 * [ENHANCEMENT] Use 2.8 of Facebook Graph API (upgrade from 2.6).
 - There were deprecations in v2.8 of the Facebook Graph API as well as
