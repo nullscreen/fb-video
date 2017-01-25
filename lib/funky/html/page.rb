@@ -20,7 +20,7 @@ module Funky
           http.request request
         end
         if response.is_a? Net::HTTPRedirection
-          request = Net::HTTP::Get.new URI.parse(response.header['location'])
+          request = Net::HTTP::Get.new URI.parse(URI.encode(response.header['location']))
           response = Net::HTTP.start(uri.host, 443, use_ssl: true) do |http|
             http.request request
           end
