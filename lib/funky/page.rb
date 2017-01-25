@@ -1,5 +1,5 @@
 module Funky
-  class Page < FacebookGraphRootNode
+  class Page < GraphRootNode
 
     # @return [String] The name of the Facebook Page. For example, for
     # www.facebook.com/platform the name is 'Facebook For Developers'.

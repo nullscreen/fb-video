@@ -1,5 +1,5 @@
 module Funky
-  class FacebookGraphRootNode
+  class GraphRootNode
     attr_reader :data
 
     def initialize(data)

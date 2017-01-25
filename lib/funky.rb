@@ -4,7 +4,7 @@ require 'funky/errors'
 require 'net/http'
 require 'funky/connections/api'
 require 'funky/configuration'
-require "funky/facebook_graph_root_node"
+require "funky/graph_root_node"
 require "funky/video"
 require "funky/page"
 
