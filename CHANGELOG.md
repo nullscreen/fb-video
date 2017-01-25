@@ -8,8 +8,8 @@ For more information about changelogs, check
 
 ## 0.2.13 - 2017/01/25
 
-* [BUGFIX] Add URI encoding to URLs with spacing that need to be followed when
-  Facebook responds with a 302
+* [BUGFIX] When Facebook responds with a 302 redirect, sometimes an URL
+  with a space is returned (e.g., "https://www.facebook.com/KinoToPrzygoda /videos/322742591438587/") that is not URI encoded. This causes URI#parse to raise an InvalidURIError unless the URL is URL encoded.
 
 
 ## 2017/01/24
