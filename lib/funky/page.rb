@@ -1,14 +1,16 @@
 module Funky
   class Page < FacebookGraphRootNode
-    # For further detailed documentation, see
-    # https://developers.facebook.com/docs/graph-api/reference/page/
 
-    # @return [String] the name of the Facebook Page.
+    # @return [String] The name of the Facebook Page. For example, for
+    # www.facebook.com/platform the name is 'Facebook For Developers'.
+    # @see https://developers.facebook.com/docs/graph-api/reference/page/
     def username
       data[:username]
     end
 
-    # @return [String] the username of the Facebook Page.
+    # @return [String] The alias of the Facebook Page. For example, for
+    # www.facebook.com/platform the username is 'platform'.
+    # @see https://developers.facebook.com/docs/graph-api/reference/page/
     def name
       data[:name]
     end
