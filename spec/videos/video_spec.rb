@@ -64,7 +64,7 @@ describe 'Video' do
       include_examples 'check id and counters'
     end
 
-    context 'given a video ID that will cause a redirect is passed' do
+    context 'give a video published by a page with a space in its username' do
       let(:video_id) { redirect_video_id }
 
       include_examples 'check id and counters'

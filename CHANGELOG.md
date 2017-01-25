@@ -8,8 +8,7 @@ For more information about changelogs, check
 
 ## 0.2.13 - 2017/01/25
 
-* [BUGFIX] When Facebook responds with a 302 redirect, sometimes an URL
-  with a space is returned (e.g., "https://www.facebook.com/KinoToPrzygoda /videos/322742591438587/") that is not URI encoded. This causes URI#parse to raise an InvalidURIError unless the URL is URL encoded.
+* [BUGFIX] Correctly fetch data for videos that belong to a Facebook page with a username that contains URL-unsafe characters. For instance "https://www.facebook.com/KinoToPrzygoda /" (with a space) is a valid Facebook page URL.
 
 
 ## 2017/01/24
