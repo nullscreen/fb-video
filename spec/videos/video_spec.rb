@@ -5,6 +5,7 @@ describe 'Video' do
   let(:existing_video_id) { '1042790765791228' }
   let(:unknown_video_id) { 'does-not-exist' }
   let(:another_video_id) { '903078593095780' }
+  let(:redirect_video_id) { '322742591438587' }
 
   describe '.where(id: video_ids)' do
     let(:videos) { Funky::Video.where(id: video_ids) }
@@ -59,6 +60,12 @@ describe 'Video' do
 
     context 'given an existing video ID was passed' do
       let(:video_id) { existing_video_id }
+
+      include_examples 'check id and counters'
+    end
+
+    context 'give a video published by a page with a space in its username' do
+      let(:video_id) { redirect_video_id }
 
       include_examples 'check id and counters'
     end
