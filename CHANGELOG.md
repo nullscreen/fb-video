@@ -6,13 +6,17 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.14 - 2017/01/31
+
+* [ENHANCEMENT] Add the Funky::Page API to fetch name, username,
+  location, city, state, zip, street, country, country_code, longitude,
+  and latitude fields from the Facebook Graph API given a page ID.
+
 ## 0.2.13 - 2017/01/25
+
 * [BUGFIX] Correctly fetch data for videos that belong to a Facebook page with a username that contains URL-unsafe characters. For instance "https://www.facebook.com/KinoToPrzygoda /" (with a space) is a valid Facebook page URL.
-* [ENHANCEMENT] Add the Funky::Page API to fetch username and name
-  fields from the Facebook Graph API given a page ID
 * [ENHANCEMENT] Use 2.8 of Facebook Graph API (upgrade from 2.6).
-- There were deprecations in v2.8 of the Facebook Graph API as well as
-additions documented in [the changelog](https://developers.facebook.com/docs/apps/changelog).
+- There were deprecations in v2.8 of the Facebook Graph API as well as additions documented in [the changelog](https://developers.facebook.com/docs/apps/changelog).
 - The current API of Funky is not affected.
 
 ## 0.2.12 - 2017/01/19

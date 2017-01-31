@@ -1,21 +1,78 @@
 module Funky
   class Page < GraphRootNode
 
-    # @example
+    # @note
     #   For example, for www.facebook.com/platform the username is 'platform'.
     # @see https://developers.facebook.com/docs/graph-api/reference/page/
-    # @return [String] The alias of the Facebook Page.
+    # @return [String] the alias of the Facebook Page.
     def username
       data[:username]
     end
 
-    # @example
+    # @note
     #   For example, for www.facebook.com/platform the name is
     #   'Facebook For Developers'.
     # @see https://developers.facebook.com/docs/graph-api/reference/page/
-    # @return [String] The name of the Facebook Page.
+    # @return [String] the name of the Facebook Page.
     def name
       data[:name]
+    end
+
+    # @note
+    #   location is a Hash that contains more specific properties such as city,
+    #   state, zip, etc.
+    # @see https://developers.facebook.com/docs/graph-api/reference/page/
+    # @return [Hash] the location of the Facebook Page if it is present
+    def location
+      data.fetch(:location, {})
+    end
+
+    # @see https://developers.facebook.com/docs/graph-api/reference/location/
+    # @return [String, nil] the city of the Facebook Page if it is present
+    def city
+      location[:city]
+    end
+
+    # @see https://developers.facebook.com/docs/graph-api/reference/location/
+    # @return [String, nil] the street of the Facebook Page if it is present
+    def street
+      location[:street]
+    end
+
+    # @see https://developers.facebook.com/docs/graph-api/reference/location/
+    # @return [String, nil] the state of the Facebook Page if it is present
+    def state
+      location[:state]
+    end
+
+    # @see https://developers.facebook.com/docs/graph-api/reference/location/
+    # @return [String, nil] the country of the Facebook Page if it is present
+    def country
+      location[:country]
+    end
+
+    # @see https://developers.facebook.com/docs/graph-api/reference/location/
+    # @return [String, nil] the country code of the Facebook Page if it is present
+    def country_code
+      location[:country_code]
+    end
+
+    # @see https://developers.facebook.com/docs/graph-api/reference/location/
+    # @return [String] the zip code of the Facebook Page if it is present
+    def zip
+      location[:zip]
+    end
+
+    # @see https://developers.facebook.com/docs/graph-api/reference/location/
+    # @return [Fixnum, nil] the latitude of the Facebook Page if it is present
+    def latitude
+      location[:latitude]
+    end
+
+    # @see https://developers.facebook.com/docs/graph-api/reference/location/
+    # @return [Fixnum, nil] the longitude of the Facebook Page if it is present
+    def longitude
+      location[:longitude]
     end
 
     # Fetches the data from Facebook's APIs and instantiates the data
@@ -41,7 +98,8 @@ module Funky
     def self.fields
       [
         'name',
-        'username'
+        'username',
+        'location'
       ]
     end
   end

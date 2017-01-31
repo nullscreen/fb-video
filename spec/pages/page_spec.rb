@@ -1,7 +1,8 @@
 require 'spec_helper'
+require 'pages/shared/examples'
 
 describe 'Page' do
-  let(:existing_page_id) { '1487249874853741' }
+  let(:existing_page_id) { '1191441824276882' }
   let(:unknown_page_id) { 'does-not-exist' }
   let(:another_page_id) { '526533744142224' }
 
@@ -12,9 +13,14 @@ describe 'Page' do
       let(:page_ids) {existing_page_id}
       let(:page) {pages.first}
 
-      it { expect(page.id).to be_a(String) }
-      it { expect(page.username).to be_a(String) }
-      it { expect(page.name).to be_a(String) }
+      include_examples 'id and name properties'
+    end
+
+    context 'given a page ID of a page with location data' do
+      let(:page_ids) {existing_page_id}
+      let(:page) {pages.first}
+
+      include_examples 'location properties'
     end
 
     context 'given one unknown page ID was passed' do

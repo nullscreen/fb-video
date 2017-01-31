@@ -41,6 +41,7 @@ module Funky
       data.fetch(:from)[:id]
     end
 
+    # @return [String] the url of Facebook page for the video.
     def page_url
       "https://www.facebook.com/#{page_id}"
     end
