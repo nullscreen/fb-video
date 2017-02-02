@@ -1,0 +1,106 @@
+module Funky
+  class Page < GraphRootNode
+
+    # @note
+    #   For example, for www.facebook.com/platform the username is 'platform'.
+    # @see https://developers.facebook.com/docs/graph-api/reference/page/
+    # @return [String] the alias of the Facebook Page.
+    def username
+      data[:username]
+    end
+
+    # @note
+    #   For example, for www.facebook.com/platform the name is
+    #   'Facebook For Developers'.
+    # @see https://developers.facebook.com/docs/graph-api/reference/page/
+    # @return [String] the name of the Facebook Page.
+    def name
+      data[:name]
+    end
+
+    # @note
+    #   location is a Hash that contains more specific properties such as city,
+    #   state, zip, etc.
+    # @see https://developers.facebook.com/docs/graph-api/reference/page/
+    # @return [Hash] the location of the Facebook Page if it is present
+    def location
+      data.fetch(:location, {})
+    end
+
+    # @see https://developers.facebook.com/docs/graph-api/reference/location/
+    # @return [String, nil] the city of the Facebook Page if it is present
+    def city
+      location[:city]
+    end
+
+    # @see https://developers.facebook.com/docs/graph-api/reference/location/
+    # @return [String, nil] the street of the Facebook Page if it is present
+    def street
+      location[:street]
+    end
+
+    # @see https://developers.facebook.com/docs/graph-api/reference/location/
+    # @return [String, nil] the state of the Facebook Page if it is present
+    def state
+      location[:state]
+    end
+
+    # @see https://developers.facebook.com/docs/graph-api/reference/location/
+    # @return [String, nil] the country of the Facebook Page if it is present
+    def country
+      location[:country]
+    end
+
+    # @see https://developers.facebook.com/docs/graph-api/reference/location/
+    # @return [String, nil] the country code of the Facebook Page if it is present
+    def country_code
+      location[:country_code]
+    end
+
+    # @see https://developers.facebook.com/docs/graph-api/reference/location/
+    # @return [String] the zip code of the Facebook Page if it is present
+    def zip
+      location[:zip]
+    end
+
+    # @see https://developers.facebook.com/docs/graph-api/reference/location/
+    # @return [Fixnum, nil] the latitude of the Facebook Page if it is present
+    def latitude
+      location[:latitude]
+    end
+
+    # @see https://developers.facebook.com/docs/graph-api/reference/location/
+    # @return [Fixnum, nil] the longitude of the Facebook Page if it is present
+    def longitude
+      location[:longitude]
+    end
+
+    # Fetches the data from Facebook's APIs and instantiates the data
+    # into an Array of Funky::Page objects. It can accept one page ID or an
+    # array of multiple page IDs.
+    #
+    # @example Getting one page
+    #   id = '10153834590672139'
+    #   Funky::Page.where(id: id) # => [#<Funky::Page>]
+    # @example Getting multiple videos
+    #   ids = ['10154439119663508', '10153834590672139']
+    #   Funky::Page.where(id: ids) # => [#<Funky::Page>, #<Funky::Page>]
+    #
+    # @return [Array<Funky::Page>] multiple instances of Funky::Page objects
+    #   containing data obtained by Facebook's APIs.
+    def self.where(id:)
+      return nil unless id
+      instantiate_collection(fetch_and_parse_data Array(id))
+    end
+
+  private
+
+    def self.fields
+      [
+        'name',
+        'username',
+        'location'
+      ]
+    end
+  end
+end

@@ -47,6 +47,26 @@ There are two ways to configure Funky with your App ID and App Secret:
     end
     ```
 
+##API Overview
+
+Funky consists of 2 different surface APIs - one to fetch video data
+from Facebook and one to fetch page data from Facebook.
+
+##Pages API
+
+### Use #where clause to get an array of videos
+
+```ruby
+ids = ['1487249874853741', '526533744142224']
+pages = Funky::Page.where(id: ids)
+pages.first.id            # => '1487249874853741'
+pages.first.name          # => 'Sony Pictures'
+pages.first.username      # => 'SonyPicturesGlobal'
+
+```
+
+##Videos API
+
 ### Use #where clause to get an array of videos
 
 ```ruby

@@ -45,7 +45,7 @@ describe 'Video' do
       end
     end
 
-    context 'given a Faraday::ConnectionFailed error' do
+    context 'given a connection error' do
       let(:video_ids) { [existing_video_id, another_video_id] }
       let(:socket_error) { SocketError.new }
 
@@ -64,7 +64,7 @@ describe 'Video' do
       include_examples 'check id and counters'
     end
 
-    context 'give a video published by a page with a space in its username' do
+    context 'given a video published by a page with a space in its username' do
       let(:video_id) { redirect_video_id }
 
       include_examples 'check id and counters'
