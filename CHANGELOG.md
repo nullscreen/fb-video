@@ -6,7 +6,7 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
-## 0.2.14 - unreleased
+## 0.2.14 - 2017/02/06
 
 * [ENHANCEMENT] Add the Funky::Page API to fetch name, username,
   location, city, state, zip, street, country, longitude,
