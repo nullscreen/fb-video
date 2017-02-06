@@ -6,10 +6,10 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
-## 0.2.14 - 2017/01/31
+## 0.2.14 - unreleased
 
 * [ENHANCEMENT] Add the Funky::Page API to fetch name, username,
-  location, city, state, zip, street, country, country_code, longitude,
+  location, city, state, zip, street, country, longitude,
   and latitude fields from the Facebook Graph API given a page ID.
 
 ## 0.2.13 - 2017/01/25

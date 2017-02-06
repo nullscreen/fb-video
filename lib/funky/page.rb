@@ -52,12 +52,6 @@ module Funky
     end
 
     # @see https://developers.facebook.com/docs/graph-api/reference/location/
-    # @return [String, nil] the country code of the Facebook Page if it is present
-    def country_code
-      location[:country_code]
-    end
-
-    # @see https://developers.facebook.com/docs/graph-api/reference/location/
     # @return [String] the zip code of the Facebook Page if it is present
     def zip
       location[:zip]
