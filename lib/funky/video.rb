@@ -18,7 +18,7 @@ module Funky
 
     # @return [String] the description of the video.
     def description
-      data[:description]
+      data[:description].to_s
     end
 
     # @return [Float] the length (duration) of the video.

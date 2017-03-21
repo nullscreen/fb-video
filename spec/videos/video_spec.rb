@@ -6,6 +6,7 @@ describe 'Video' do
   let(:unknown_video_id) { 'does-not-exist' }
   let(:another_video_id) { '903078593095780' }
   let(:redirect_video_id) { '322742591438587' }
+  let(:no_description_id) { '10154637916753090' }
 
   describe '.where(id: video_ids)' do
     let(:videos) { Funky::Video.where(id: video_ids) }
@@ -28,6 +29,13 @@ describe 'Video' do
       let(:video_ids) {unknown_video_id}
 
       it { expect(videos).to be_empty }
+    end
+
+    context 'given a video with no description' do
+      let(:video_ids) { no_description_id }
+      let(:video) {videos.first}
+
+      it { expect(video.description).to be_a(String) }
     end
 
     context 'given multiple existing video IDs were passed' do
