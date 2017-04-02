@@ -15,12 +15,14 @@ module Funky
 
     def self.fetch_and_parse_data(ids)
       if ids.is_a?(Array) && ids.size > 1
-        response = Connection::API.batch_request(ids: ids, fields: fields)
+        ids.each_slice(50).inject([]) do |total, slice|
+          response = Connection::API.batch_request ids: slice, fields: fields
+          total += parse response
+        end
       else
         id = ids.is_a?(Array) ? ids.first : ids
-        response = Connection::API.request(id: id, fields: fields)
+        parse Connection::API.request(id: id, fields: fields)
       end
-      parse response
     rescue ContentNotFound
       []
     end

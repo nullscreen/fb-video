@@ -6,6 +6,10 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.16 - 2017/04/02
+
+* [ENHANCEMENT] Video.where(id: [..ids..]) now works even with more than 50 ids.
+
 ## 0.2.15 - 2017/03/21
 
 * [BUGFIX] Return a string for the description field of a Funky::Video
