@@ -47,12 +47,12 @@ There are two ways to configure Funky with your App ID and App Secret:
     end
     ```
 
-##API Overview
+## API Overview
 
 Funky consists of 2 different surface APIs - one to fetch video data
 from Facebook and one to fetch page data from Facebook.
 
-##Pages API
+## Pages API
 
 ### Use #where clause to get an array of videos
 
@@ -65,7 +65,7 @@ pages.first.username      # => 'SonyPicturesGlobal'
 
 ```
 
-##Videos API
+## Videos API
 
 ### Use #where clause to get an array of videos
 
