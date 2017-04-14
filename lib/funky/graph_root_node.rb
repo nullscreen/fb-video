@@ -4,11 +4,12 @@ module Funky
 
     def initialize(data)
       @data = data
+      @id = data[:id]
     end
 
     # @return [String] the object ID.
     def id
-      data[:id]
+      @id
     end
 
   private

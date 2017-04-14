@@ -26,6 +26,22 @@ module Funky
       data[:length]
     end
 
+    def title
+      data[:title].to_s
+    end
+
+    def count_likes
+      data[:likes][:summary][:total_count]
+    end
+
+    def count_comments
+      data[:comments][:summary][:total_count]
+    end
+
+    def count_reactions
+      data[:reactions][:summary][:total_count]
+    end
+
     # @return [String] the picture URL of the video.
     def picture
       data[:picture]
