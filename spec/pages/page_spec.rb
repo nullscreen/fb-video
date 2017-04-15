@@ -6,6 +6,33 @@ describe 'Page' do
   let(:unknown_page_id) { 'does-not-exist' }
   let(:another_page_id) { '526533744142224' }
 
+  describe '#videos' do
+    let(:page) { Funky::Page.find('FullscreenInc') }
+    let(:videos) { page.videos }
+
+    it { expect(videos[0]).to be_a(Funky::Video) }
+    specify 'returns videos more than one page' do
+      expect(videos.count).to be > 100
+    end
+  end
+
+  describe '.find(page_id)' do
+    let(:page) { Funky::Page.find(page_id) }
+
+    context 'given an existing page ID was passed' do
+      let(:page_id) { existing_page_id }
+
+      include_examples 'id and name properties'
+      include_examples 'location properties'
+    end
+
+    context 'given a non-existing page ID was passed' do
+      let(:page_id) { unknown_page_id }
+
+      it { expect { page }.to raise_error(Funky::ContentNotFound) }
+    end
+  end
+
   describe '.where(id: page_ids)' do
     let(:pages) { Funky::Page.where(id: page_ids) }
 

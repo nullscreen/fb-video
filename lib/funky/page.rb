@@ -1,11 +1,30 @@
 module Funky
   class Page < GraphRootNode
 
+    # Fetches the data from Facebook Graph API and returns a Funky::Page object.
+    # It accepts a page ID.
+    #
+    # @example Getting a page object
+    #   Funky::Page.find 'FullscreenInc' # or
+    #   Funky::Page.find '221406534569729'
+    #   # => #<Funky::Page @data={:name=>"Fullscreen", :id=>"221406534569729"}>
+    #
+    # @return [Funky::Page] containing the data fetched by Facebook Graph API.
     def self.find(page_id)
-      page = Funky::Connection::API.fetch("#{page_id}?fields=name,location")
+      page = Funky::Connection::API.fetch("#{page_id}?fields=name,username,location")
       new(page)
     end
 
+    # Fetches data from Facebook Graph API and returns an array of Funky::Video
+    # objects belong to the caller page.
+    #
+    # @example Getting videos under a page
+    #   page = Funky::Page.find 'FullscreenInc'
+    #   page.videos
+    #   # => [#<Funky::Video @data={...}>, #<Funky::Video @data={...}>]
+    #
+    # @return [Array<Funky::Video>] multiple Funky::Video objects containing data
+    #   fetched by Facebook Graph API.
     def videos
       videos = Funky::Connection::API.fetch(
         "#{id}/videos?fields=id,title,description,created_time,length,comments.limit(0).summary(true),likes.limit(0).summary(true),reactions.limit(0).summary(true)",
