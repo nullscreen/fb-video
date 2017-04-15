@@ -1,13 +1,15 @@
 module Funky
   class Page < GraphRootNode
 
-    def self.with_page_id(page_id)
-      page = Funky::Connection::API.fetch_one(page_id, "fields=name,location")
+    def self.find(page_id)
+      page = Funky::Connection::API.fetch("#{page_id}?fields=name,location")
       new(page)
     end
 
     def videos
-      videos = Funky::Connection::API.fetch_all(@id, '/videos', 'fields=id,title,description,created_time,length,comments.limit(0).summary(true),likes.limit(0).summary(true),reactions.limit(0).summary(true)')
+      videos = Funky::Connection::API.fetch(
+        "#{id}/videos?fields=id,title,description,created_time,length,comments.limit(0).summary(true),likes.limit(0).summary(true),reactions.limit(0).summary(true)",
+        is_array: true)
       videos.map {|video| Video.new(video) }
     end
 

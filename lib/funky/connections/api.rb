@@ -5,27 +5,16 @@ module Funky
   # @api private
   module Connection
     class API < Base
-      def self.fetch_one(id, fetch_query)
-        uri = URI::HTTPS.build host: host,
-          path: "/v2.8/#{id}",
-          query: "#{fetch_query}&access_token=#{app_id}%7C#{app_secret}"
-        response = response_for(get_http_request(uri), uri)
-        JSON.parse(response.body, symbolize_names: true)
+      def self.fetch(path_query, is_array: false)
+        uri = URI "https://#{host}/v2.8/#{path_query}&limit=100&access_token=#{app_id}%7C#{app_secret}"
+        is_array ? fetch_multiple_pages(uri) : json_for(uri)
       end
 
-      def self.fetch_all(id, end_point, fetch_query)
-        uri = URI::HTTPS.build host: host,
-          path: "/v2.8/#{id}#{end_point}",
-          query: "#{fetch_query}&limit=100&access_token=#{app_id}%7C#{app_secret}"
-        fetch_data_with_pages(uri)
-      end
-
-      def self.fetch_data_with_pages(uri)
-        response = response_for(get_http_request(uri), uri)
-        json = JSON.parse(response.body, symbolize_names: true)
+      def self.fetch_multiple_pages(uri)
+        json = json_for(uri)
         if json[:paging][:next]
           next_paging_uri = URI json[:paging][:next]
-          json[:data] + fetch_data_with_pages(next_paging_uri)
+          json[:data] + fetch_multiple_pages(next_paging_uri)
         else
           json[:data]
         end

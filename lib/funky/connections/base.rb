@@ -17,6 +17,11 @@ module Funky
       rescue SocketError => e
         raise ConnectionError, e.message
       end
+
+      def self.json_for(uri)
+        response = response_for(get_http_request(uri), uri)
+        JSON.parse(response.body, symbolize_names: true)
+      end
     end
   end
 end
