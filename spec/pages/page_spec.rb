@@ -14,6 +14,15 @@ describe 'Page' do
     specify 'returns videos more than one page' do
       expect(videos.count).to be > 100
     end
+
+    context 'given a video instantiated by #videos' do
+      let(:video) { videos.first }
+
+      it { expect(video.title).to be_a(String) }
+      it { expect(video.count_likes).to be_a(Integer) }
+      it { expect(video.count_comments).to be_a(Integer) }
+      it { expect(video.count_reactions).to be_a(Integer) }
+    end
   end
 
   describe '.find(page_id)' do
