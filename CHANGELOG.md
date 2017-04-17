@@ -6,6 +6,11 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.17 - 2017/04/17
+
+* [FEATURE] Add `Funky::Page.find` class method to find a page by its page ID.
+* [FEATURE] Add `Funky::Page#videos` instance method to list all videos under a page fetched by API call.
+
 ## 0.2.16 - 2017/04/02
 
 * [ENHANCEMENT] Video.where(id: [..ids..]) now works even with more than 50 ids.
