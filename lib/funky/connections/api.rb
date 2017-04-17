@@ -5,6 +5,21 @@ module Funky
   # @api private
   module Connection
     class API < Base
+      def self.fetch(path_query, is_array: false)
+        uri = URI "https://#{host}/v2.8/#{path_query}&limit=100&access_token=#{app_id}%7C#{app_secret}"
+        is_array ? fetch_multiple_pages(uri) : json_for(uri)
+      end
+
+      def self.fetch_multiple_pages(uri)
+        json = json_for(uri)
+        if json[:paging][:next]
+          next_paging_uri = URI json[:paging][:next]
+          json[:data] + fetch_multiple_pages(next_paging_uri)
+        else
+          json[:data]
+        end
+      end
+
       def self.request(id:, fields:)
         uri = URI::HTTPS.build host: host,
           path: "/v2.8/#{id}",

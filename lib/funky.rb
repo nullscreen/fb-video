@@ -1,7 +1,8 @@
 require 'date'
+require 'net/http'
+
 require "funky/version"
 require 'funky/errors'
-require 'net/http'
 require 'funky/connections/api'
 require 'funky/configuration'
 require "funky/graph_root_node"

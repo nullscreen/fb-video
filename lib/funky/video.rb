@@ -26,6 +26,27 @@ module Funky
       data[:length]
     end
 
+    # @return [String] the title of the video.
+    def title
+      data[:title].to_s
+    end
+
+    # see https://developers.facebook.com/docs/graph-api/reference/video/
+    # @return [Integer] the total number of likes for the video.
+    def count_likes
+      data[:likes][:summary][:total_count]
+    end
+
+    # @return [Integer] the total number of comments for the video.
+    def count_comments
+      data[:comments][:summary][:total_count]
+    end
+
+    # @return [Integer] the total number of reactions for the video.
+    def count_reactions
+      data[:reactions][:summary][:total_count]
+    end
+
     # @return [String] the picture URL of the video.
     def picture
       data[:picture]
