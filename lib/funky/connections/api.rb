@@ -13,12 +13,27 @@ module Funky
       def self.fetch_multiple_pages(uri)
         json = json_for(uri)
         if json[:data].empty?
-          []
+          @try_count ||= 0
+          if @previous_timestamp && @try_count < 1 && (Date.parse @previous_timestamp rescue nil)
+            timestamp = (Date.parse(@previous_timestamp) - 1).strftime('%F')
+            @try_count += 1
+            @previous_timestamp = timestamp
+            new_query = URI.decode_www_form(uri.query).to_h.merge('until' => timestamp)
+            uri.query = URI.encode_www_form(new_query)
+            json[:data] + fetch_multiple_pages(uri)
+          else
+            []
+          end
         else
-          timestamp = Time.parse(json[:data][-1][:created_time]).to_i
+          timestamp = if json[:data].count == 1
+              Date.parse(json[:data][-1][:created_time]).strftime('%F')
+            else
+              Time.parse(json[:data][-1][:created_time]).to_i
+            end
           if @previous_timestamp == timestamp
             []
           else
+            @try_count = 0
             @previous_timestamp = timestamp
             new_query = URI.decode_www_form(uri.query).to_h.merge('until' => timestamp)
             uri.query = URI.encode_www_form(new_query)
