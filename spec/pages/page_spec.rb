@@ -27,6 +27,13 @@ describe 'Page' do
       it { expect(video.count_comments).to be_a(Integer) }
       it { expect(video.count_reactions).to be_a(Integer) }
     end
+
+    let(:netflix_page) { Funky::Page.find('NetflixUS') }
+    let(:netflix_videos) { netflix_page.videos }
+
+    specify 'includes the first video of netflix page' do
+      expect(netflix_videos.map {|v| v.id}).to include '68196585394'
+    end
   end
 
   describe '.find(page_id)' do
