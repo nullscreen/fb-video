@@ -15,6 +15,10 @@ describe 'Page' do
       expect(videos.count).to be > 100
     end
 
+    specify 'includes the first video of fullscreen page' do
+      expect(videos.map {|v| v.id}).to include '621484897895222'
+    end
+
     context 'given a video instantiated by #videos' do
       let(:video) { videos.first }
 
