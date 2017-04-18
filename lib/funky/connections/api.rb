@@ -7,7 +7,7 @@ module Funky
     class API < Base
       def self.fetch(path_query, is_array: false)
         uri = URI "https://#{host}/v2.8/#{path_query}&limit=100&access_token=#{app_id}%7C#{app_secret}"
-        is_array ? fetch_multiple_pages(uri) : json_for(uri)
+        is_array ? fetch_multiple_pages(uri).uniq : json_for(uri)
       end
 
       def self.fetch_multiple_pages(uri)
@@ -15,12 +15,12 @@ module Funky
         if json[:data].empty?
           []
         else
-          timestamp = json[:data][-1][:created_time]
+          timestamp = Time.parse(json[:data][-1][:created_time]).to_i
           if @previous_timestamp == timestamp
             []
           else
             @previous_timestamp = timestamp
-            new_query = URI.decode_www_form(uri.query).to_h.merge('until' => Time.parse(timestamp).to_i)
+            new_query = URI.decode_www_form(uri.query).to_h.merge('until' => timestamp)
             uri.query = URI.encode_www_form(new_query)
             json[:data] + fetch_multiple_pages(uri)
           end
