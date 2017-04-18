@@ -12,11 +12,17 @@ module Funky
 
       def self.fetch_multiple_pages(uri)
         json = json_for(uri)
-        if json[:paging][:next]
-          next_paging_uri = URI json[:paging][:next]
-          json[:data] + fetch_multiple_pages(next_paging_uri)
+        if json[:data].empty?
+          []
         else
-          json[:data]
+          timestamp = json[:data][-1][:created_time]
+          if @previous_timestamp == timestamp
+            []
+          else
+            @previous_timestamp = timestamp
+            uri.query = uri.query + "&until=#{Time.parse(timestamp).to_i}"
+            json[:data] + fetch_multiple_pages(uri)
+          end
         end
       end
 
