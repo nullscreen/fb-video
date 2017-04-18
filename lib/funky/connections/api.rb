@@ -20,7 +20,8 @@ module Funky
             []
           else
             @previous_timestamp = timestamp
-            uri.query = uri.query + "&until=#{Time.parse(timestamp).to_i}"
+            new_query = URI.decode_www_form(uri.query).to_h.merge('until' => Time.parse(timestamp).to_i)
+            uri.query = URI.encode_www_form(new_query)
             json[:data] + fetch_multiple_pages(uri)
           end
         end
