@@ -1,5 +1,7 @@
-require 'funky/connections/base'
 require 'json'
+require 'time'
+
+require 'funky/connections/base'
 
 module Funky
   # @api private
