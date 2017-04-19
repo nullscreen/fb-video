@@ -7,16 +7,34 @@ module Funky
     class API < Base
       def self.fetch(path_query, is_array: false)
         uri = URI "https://#{host}/v2.8/#{path_query}&limit=100&access_token=#{app_id}%7C#{app_secret}"
-        is_array ? fetch_multiple_pages(uri) : json_for(uri)
+        is_array ? fetch_multiple_pages(uri).uniq : json_for(uri)
       end
 
       def self.fetch_multiple_pages(uri)
         json = json_for(uri)
-        if json[:paging][:next]
-          next_paging_uri = URI json[:paging][:next]
-          json[:data] + fetch_multiple_pages(next_paging_uri)
+        if json[:data].empty?
+          @try_count ||= 0
+          if @previous_timestamp && @try_count < 1 && (Date.parse @previous_timestamp rescue nil)
+            timestamp = (Date.parse(@previous_timestamp) - 1).strftime('%F')
+            @try_count += 1
+            @previous_timestamp = timestamp
+            new_query = URI.decode_www_form(uri.query).to_h.merge('until' => timestamp)
+            uri.query = URI.encode_www_form(new_query)
+            json[:data] + fetch_multiple_pages(uri)
+          else
+            []
+          end
         else
-          json[:data]
+          timestamp = if json[:data].count == 1
+              Date.parse(json[:data][-1][:created_time]).strftime('%F')
+            else
+              Time.parse(json[:data][-1][:created_time]).to_i
+            end
+          @try_count = 0
+          @previous_timestamp = timestamp
+          new_query = URI.decode_www_form(uri.query).to_h.merge('until' => timestamp)
+          uri.query = URI.encode_www_form(new_query)
+          json[:data] + fetch_multiple_pages(uri)
         end
       end
 

@@ -6,6 +6,10 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.18 - 2017/04/19
+
+* [ENHANCEMENT] `Funky::Page#videos` now fetches more videos by time-based pagination.
+
 ## 0.2.17 - 2017/04/17
 
 * [FEATURE] Add `Funky::Page.find` class method to find a page by its page ID.
