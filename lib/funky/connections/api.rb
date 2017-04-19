@@ -30,15 +30,11 @@ module Funky
             else
               Time.parse(json[:data][-1][:created_time]).to_i
             end
-          if @previous_timestamp == timestamp
-            []
-          else
-            @try_count = 0
-            @previous_timestamp = timestamp
-            new_query = URI.decode_www_form(uri.query).to_h.merge('until' => timestamp)
-            uri.query = URI.encode_www_form(new_query)
-            json[:data] + fetch_multiple_pages(uri)
-          end
+          @try_count = 0
+          @previous_timestamp = timestamp
+          new_query = URI.decode_www_form(uri.query).to_h.merge('until' => timestamp)
+          uri.query = URI.encode_www_form(new_query)
+          json[:data] + fetch_multiple_pages(uri)
         end
       end
 
