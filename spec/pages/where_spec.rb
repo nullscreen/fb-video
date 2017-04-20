@@ -44,13 +44,27 @@ describe 'Page' do
       end
     end
 
-    context 'given a connection error' do
-      let(:page_ids) { [existing_page_id, another_page_id] }
-      let(:socket_error) { SocketError.new }
+    context 'given a request that raises' do
+      before { expect(Net::HTTP).to receive(:start).once.and_raise http_error }
 
-      before { expect(Net::HTTP).to(receive(:start).and_raise socket_error) }
+      context 'a SocketError' do
+        let(:page_ids) { [existing_page_id, another_page_id] }
+        let(:http_error) { SocketError.new }
 
-      it { expect { pages }.to raise_error(Funky::ConnectionError) }
+        context 'every time' do
+          before { expect(Net::HTTP).to receive(:start).at_least(:once).and_raise http_error }
+
+          it { expect { pages }.to raise_error(Funky::ConnectionError) }
+        end
+
+        context 'but works the second time' do
+          before { expect(Net::HTTP).to receive(:start).at_least(:once).and_return retry_response }
+          before { allow(retry_response).to receive(:body) }
+          let(:retry_response) { Net::HTTPOK.new nil, nil, nil }
+
+          it { expect { pages }.not_to raise_error }
+        end
+      end
     end
   end
 end
