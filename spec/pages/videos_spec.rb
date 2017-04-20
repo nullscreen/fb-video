@@ -42,5 +42,31 @@ describe 'Page' do
         expect(videos.map {|v| v.id}).to include '68196585394'
       end
     end
+
+    context 'given a request that raises' do
+      let(:response) { Net::HTTPServerError.new nil, nil, nil }
+      let(:response_body) { '{}' }
+      before { expect(Net::HTTP).to receive(:start).once.and_return response }
+      before { allow(response).to receive(:body).and_return response_body }
+
+      context 'a 500 Server Error' do
+        let(:page_id) { fullscreen_page_id }
+        let(:retry_response) { retry_response_class.new nil, nil, nil }
+        before { allow(retry_response).to receive(:body).and_return response_body }
+        before { expect(Net::HTTP).to receive(:start).at_least(:once).and_return retry_response }
+
+        context 'every time' do
+          let(:retry_response_class) { Net::HTTPServerError }
+
+          it { expect{ page }.to raise_error Funky::ConnectionError }
+        end
+
+        context 'but returns a success code 2XX the second time' do
+          let(:retry_response_class) { Net::HTTPOK }
+
+          it { expect{ page }.not_to raise_error }
+        end
+      end
+    end
   end
 end

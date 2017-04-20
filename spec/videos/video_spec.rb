@@ -83,7 +83,7 @@ describe 'Video' do
       let(:video_ids) { [existing_video_id, another_video_id] }
       let(:socket_error) { SocketError.new }
 
-      before { expect(Net::HTTP).to(receive(:start).and_raise socket_error) }
+      before { expect(Net::HTTP).to(receive(:start).at_least(1).times.and_raise socket_error) }
 
       it { expect { videos }.to raise_error(Funky::ConnectionError) }
     end

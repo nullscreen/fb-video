@@ -6,6 +6,11 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.19 - 2017/04/20
+
+* [IMPROVEMENT] Retry 3 times after a server error or a socket error, to fetch
+  data even with any temporary issue from Facebook.
+
 ## 0.2.18 - 2017/04/19
 
 * [ENHANCEMENT] `Funky::Page#videos` now fetches more videos by time-based pagination.
