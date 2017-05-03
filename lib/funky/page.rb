@@ -11,7 +11,7 @@ module Funky
     #
     # @return [Funky::Page] containing the data fetched by Facebook Graph API.
     def self.find(page_id)
-      page = Funky::Connection::API.fetch("#{page_id}?fields=name,username,location")
+      page = Funky::Connection::API.fetch("#{page_id}?fields=name,username,location,fan_count")
       new(page)
     end
 
@@ -47,6 +47,11 @@ module Funky
     # @return [String] the name of the Facebook Page.
     def name
       data[:name]
+    end
+
+    # @return [Integer] the number of people who likes the Facebook page.
+    def fan_count
+      data[:fan_count]
     end
 
     # @note
