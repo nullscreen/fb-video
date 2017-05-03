@@ -13,6 +13,8 @@ describe 'Page' do
 
       include_examples 'id and name properties'
       include_examples 'location properties'
+
+      it { expect(page.fan_count).to be_an(Integer) }
     end
 
     context 'given a non-existing page ID was passed' do

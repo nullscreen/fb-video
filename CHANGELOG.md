@@ -6,6 +6,10 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.21 - 2017/05/03
+
+* [FEATURE] Add `Funky::Page#fan_count`.
+
 ## 0.2.20 - 2017/04/20
 
 * [BUGFIX] Fix `Funky::Page#videos` by adding condition for an edge case.
