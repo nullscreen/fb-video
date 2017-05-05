@@ -9,10 +9,5 @@ module Funky
     def created_time
       DateTime.parse data[:created_time]
     end
-
-    # @return [Integer] the number of shares of the post.
-    def count_shares
-      data[:shares] && data[:shares][:count] || 0
-    end
   end
 end

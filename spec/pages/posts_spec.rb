@@ -15,7 +15,6 @@ describe 'Page' do
 
         expect(posts).to all be_a Funky::Post
         expect(post.type).to be_a String
-        expect(post.count_shares).to be_a Integer
         expect(post.created_time).to be_a DateTime
       end
 
