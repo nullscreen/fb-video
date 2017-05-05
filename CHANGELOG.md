@@ -6,6 +6,10 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.22 - unreleased
+
+* [FEATURE] Add `Funky::Page#posts`.
+
 ## 0.2.21 - 2017/05/03
 
 * [FEATURE] Add `Funky::Page#fan_count`.

@@ -54,7 +54,7 @@ from Facebook and one to fetch page data from Facebook.
 
 ## Pages API
 
-### Use #where clause to get an array of videos
+### Use #where clause to get an array of pages
 
 ```ruby
 ids = ['1487249874853741', '526533744142224']
@@ -62,7 +62,14 @@ pages = Funky::Page.where(id: ids)
 pages.first.id            # => '1487249874853741'
 pages.first.name          # => 'Sony Pictures'
 pages.first.username      # => 'SonyPicturesGlobal'
+```
 
+### Use #posts to get an array of posts
+
+```ruby
+page = Funky::Page.find('FullscreenInc')
+posts = page.posts
+posts.first.type          # => 'video'
 ```
 
 ## Videos API
