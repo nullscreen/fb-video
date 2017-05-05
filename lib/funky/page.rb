@@ -32,6 +32,21 @@ module Funky
       videos.map {|video| Video.new(video) }
     end
 
+    # Fetches data from Facebook Graph API and returns an array of Funky::Post
+    # objects belong to the caller page.
+    #
+    # @example Getting posts under a page
+    #   page = Funky::Page.find 'FullscreenInc'
+    #   page.posts
+    #   # => [#<Funky::Post @data={...}>, #<Funky::Post @data={...}>]
+    #
+    # @return [Array<Funky::Post>] multiple Funky::Post objects containing data
+    #   fetched by Facebook Graph API.
+    def posts
+      posts = Funky::Connection::API.fetch("#{id}/posts?fields=type,created_time,shares", is_array: true)
+      posts.map {|post| Post.new(post)}
+    end
+
     # @note
     #   For example, for www.facebook.com/platform the username is 'platform'.
     # @see https://developers.facebook.com/docs/graph-api/reference/page/
