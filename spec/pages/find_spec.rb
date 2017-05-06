@@ -15,6 +15,7 @@ describe 'Page' do
       include_examples 'location properties'
 
       it { expect(page.fan_count).to be_an(Integer) }
+      it { expect([true, false]).to include(page.has_featured_video?)}
     end
 
     context 'given a non-existing page ID was passed' do
