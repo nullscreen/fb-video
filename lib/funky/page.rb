@@ -11,7 +11,7 @@ module Funky
     #
     # @return [Funky::Page] containing the data fetched by Facebook Graph API.
     def self.find(page_id)
-      page = Funky::Connection::API.fetch("#{page_id}?fields=name,username,location,fan_count")
+      page = Funky::Connection::API.fetch("#{page_id}?fields=name,username,location,fan_count,featured_video")
       new(page)
     end
 
@@ -67,6 +67,11 @@ module Funky
     # @return [Integer] the number of people who likes the Facebook page.
     def fan_count
       data[:fan_count]
+    end
+
+    # @return [Boolean] if the Facebook page has featured_video
+    def has_featured_video?
+      !data[:featured_video].nil?
     end
 
     # @note

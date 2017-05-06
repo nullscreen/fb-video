@@ -6,9 +6,10 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
-## 0.2.22 - unreleased
+## 0.2.22 - 2017/05/05
 
 * [FEATURE] Add `Funky::Page#posts`.
+* [FEATURE] Add `Funky::Page#has_featured_video?`.
 
 ## 0.2.21 - 2017/05/03
 
