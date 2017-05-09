@@ -43,7 +43,7 @@ module Funky
     # @return [Array<Funky::Post>] multiple Funky::Post objects containing data
     #   fetched by Facebook Graph API.
     def posts
-      posts = Funky::Connection::API.fetch("#{id}/posts?fields=type,created_time", is_array: true)
+      posts = Funky::Connection::API.fetch_all("#{id}/posts?fields=type,created_time")
       posts.map {|post| Post.new(post)}
     end
 

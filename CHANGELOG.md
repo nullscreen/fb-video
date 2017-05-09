@@ -6,6 +6,12 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.23 - 2017/05/09
+
+* [FEATURE] Print out logs for each pagination
+* [BUGFIX] Use cursor-based pagination for `Funky::Page#posts` to resolve
+infinite loop issue when the page has life events with old backdated time.
+
 ## 0.2.22 - 2017/05/05
 
 * [FEATURE] Add `Funky::Page#posts`.
