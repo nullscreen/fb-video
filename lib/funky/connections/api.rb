@@ -7,6 +7,22 @@ module Funky
   # @api private
   module Connection
     class API < Base
+      def self.fetch_all(path_query)
+        uri = URI "https://#{host}/v2.9/#{path_query}&limit=100&access_token=#{app_id}%7C#{app_secret}"
+        fetch_data_with_paging_token(uri)
+      end
+
+      def self.fetch_data_with_paging_token(uri)
+        json = json_for(uri)
+        if !json[:data].empty? && json[:paging][:next]
+          next_paging_uri = URI json[:paging][:next]
+          puts "Fetching '#{uri.path}' with #{ URI.decode_www_form(next_paging_uri.query).to_h['after'] }"
+          json[:data] + fetch_data_with_paging_token(next_paging_uri)
+        else
+          json[:data]
+        end
+      end
+
       def self.fetch(path_query, is_array: false)
         uri = URI "https://#{host}/v2.8/#{path_query}&limit=100&access_token=#{app_id}%7C#{app_secret}"
         is_array ? fetch_multiple_pages(uri).uniq : json_for(uri)
@@ -14,6 +30,7 @@ module Funky
 
       def self.fetch_multiple_pages(uri)
         json = json_for(uri)
+        puts "Fetching '#{uri.path}' until #{ URI.decode_www_form(uri.query).to_h['until'] || 'now'}"
         if json[:data].empty?
           @try_count ||= 0
           if @previous_timestamp && @try_count < 1 && (Date.parse @previous_timestamp rescue nil)

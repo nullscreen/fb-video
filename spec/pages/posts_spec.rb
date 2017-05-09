@@ -22,8 +22,6 @@ describe 'Page' do
         expect(posts.count).to be > 100
       end
 
-      # NOTE: This test fails if we strictly follow the Facebook
-      # documentation of fetching pages with token-based pagination.
       specify 'includes the oldest post of the page' do
         expect(posts.map {|post| post.id}).to include '221406534569729_363440160366365'
       end
