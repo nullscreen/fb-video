@@ -13,7 +13,7 @@ module Funky
     def self.find(page_id)
       page = Funky::Connection::API.fetch("#{page_id}?fields=name,username,location,fan_count,featured_video")
       if page[:name].nil?
-        raise ContentNotFound, "Sorry, page did not return its name field"
+        raise ContentNotFound, "Page not found with ID #{page_id}"
       else
         new(page)
       end
