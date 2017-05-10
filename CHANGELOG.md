@@ -6,6 +6,12 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.24 - 2017/05/10
+
+* [BUGFIX] Raise Funky::ContentNotFound error when a page does not return
+its name. This change will filter out cases a full url of website entered
+as page_id argument of `Funky::Page#find`, instead of username.
+
 ## 0.2.23 - 2017/05/09
 
 * [FEATURE] Print out logs for each pagination

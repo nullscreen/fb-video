@@ -12,7 +12,11 @@ module Funky
     # @return [Funky::Page] containing the data fetched by Facebook Graph API.
     def self.find(page_id)
       page = Funky::Connection::API.fetch("#{page_id}?fields=name,username,location,fan_count,featured_video")
-      new(page)
+      if page[:name].nil?
+        raise ContentNotFound, "Page not found with ID #{page_id}"
+      else
+        new(page)
+      end
     end
 
     # Fetches data from Facebook Graph API and returns an array of Funky::Video
