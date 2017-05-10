@@ -56,7 +56,7 @@ describe 'Page' do
 
     context 'given a request that raises' do
       let(:response) { Net::HTTPServerError.new nil, nil, nil }
-      let(:response_body) { '{}' }
+      let(:response_body) { '{"name":"Fullscreen"}' }
       before { expect(Net::HTTP).to receive(:start).once.and_return response }
       before { allow(response).to receive(:body).and_return response_body }
 
