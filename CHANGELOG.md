@@ -6,6 +6,10 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.25 - 2017/05/16
+
+* [FEATURE] Retry up to 5 times if Facebook responds with error
+
 ## 0.2.24 - 2017/05/10
 
 * [BUGFIX] Raise Funky::ContentNotFound error when a page does not return
