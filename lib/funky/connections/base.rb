@@ -9,7 +9,7 @@ module Funky
         Net::HTTP::Get.new(uri.request_uri)
       end
 
-      def self.response_for(http_request, uri, max_retries = 3)
+      def self.response_for(http_request, uri, max_retries = 5)
         response = Net::HTTP.start(uri.host, 443, use_ssl: true) do |http|
           http.request http_request
         end
@@ -26,7 +26,7 @@ module Funky
 
       def self.sleep_and_retry_response_for(http_request, uri, retries, message)
         if retries > 0
-          sleep (4 - retries) ** 2
+          sleep (6 - retries) ** 2
           response_for http_request, uri, retries - 1
         else
           raise ConnectionError, message
