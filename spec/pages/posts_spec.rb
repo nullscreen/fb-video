@@ -23,7 +23,7 @@ describe 'Page' do
       end
 
       specify 'includes the oldest post of the page' do
-        expect(posts.map {|post| post.id}).to include '221406534569729_363440160366365'
+        expect(posts.map {|post| post.id}).to include '221406534569729_221415914568791'
       end
     end
   end
