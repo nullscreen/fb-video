@@ -6,6 +6,10 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.26 - 2017/06/06
+
+* [ENHANCEMENT] Raise ContentNotFound if Page#find is called with an invalid URI
+
 ## 0.2.25 - 2017/05/16
 
 * [FEATURE] Retry up to 5 times if Facebook responds with error

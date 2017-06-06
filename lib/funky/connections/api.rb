@@ -26,6 +26,8 @@ module Funky
       def self.fetch(path_query, is_array: false)
         uri = URI "https://#{host}/v2.8/#{path_query}&limit=100&access_token=#{app_id}%7C#{app_secret}"
         is_array ? fetch_multiple_pages(uri).uniq : json_for(uri)
+      rescue URI::InvalidURIError
+        raise Funky::ContentNotFound, "Invalid URL"
       end
 
       def self.fetch_multiple_pages(uri)

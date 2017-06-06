@@ -25,6 +25,12 @@ describe 'Page' do
       it { expect { page }.to raise_error(Funky::ContentNotFound) }
     end
 
+    context 'given an invalid URI was passed' do
+      let(:page_id) { ' some invalid URL ' }
+
+      it { expect { page }.to raise_error(Funky::ContentNotFound) }
+    end
+
     context 'given a website url was passed' do
       let(:page_id) { website_url }
 
