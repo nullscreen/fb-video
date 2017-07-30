@@ -7,8 +7,12 @@ module Funky
   # @api private
   module Connection
     class API < Base
-      def self.fetch_all(path_query)
-        uri = URI "https://#{host}/v2.9/#{path_query}&limit=100&access_token=#{app_id}%7C#{app_secret}"
+      def self.fetch_all(path, params)
+        params.delete_if {|k, v| v.nil?}
+        params[:limit] = 100
+        params[:access_token] = "#{app_id}%7C#{app_secret}"
+        query = URI.encode_www_form params
+        uri = URI::HTTPS.build host: host, path: path, query: query
         fetch_data_with_paging_token(uri)
       end
 
