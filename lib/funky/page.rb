@@ -29,10 +29,11 @@ module Funky
     #
     # @return [Array<Funky::Video>] multiple Funky::Video objects containing data
     #   fetched by Facebook Graph API.
-    def videos
-      videos = Funky::Connection::API.fetch(
-        "#{id}/videos?fields=id,title,description,created_time,length,comments.limit(0).summary(true),likes.limit(0).summary(true),reactions.limit(0).summary(true)",
-        is_array: true)
+    def videos(options = {})
+      path = "/v2.9/#{id}/videos"
+      params = {fields: "id,title,description,created_time,length,comments.limit(0).summary(true),likes.limit(0).summary(true),reactions.limit(0).summary(true)"}
+      params[:since] = options[:since] if options[:since]
+      videos = Funky::Connection::API.fetch_all(path, params)
       videos.map {|video| Video.new(video) }
     end
 
@@ -46,8 +47,11 @@ module Funky
     #
     # @return [Array<Funky::Post>] multiple Funky::Post objects containing data
     #   fetched by Facebook Graph API.
-    def posts
-      posts = Funky::Connection::API.fetch_all("#{id}/posts?fields=type,created_time")
+    def posts(options = {})
+      path = "/v2.9/#{id}/posts"
+      params = {fields: "type,created_time"}
+      params[:since] = options[:since] if options[:since]
+      posts = Funky::Connection::API.fetch_all(path, params)
       posts.map {|post| Post.new(post)}
     end
 
