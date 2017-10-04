@@ -4,7 +4,7 @@ require 'pages/shared/examples'
 describe 'Page' do
   let(:existing_page_id) { '1191441824276882' }
   let(:unknown_page_id) { 'does-not-exist' }
-  let(:website_url) { 'https://www.facebook.com/pg/FoxMovies/videos/?ref=page_internal' }
+  let(:website_url) { 'http://www.imdb.com/title/tt2015381/' }
 
   describe '.find(page_id)' do
     let(:page) { Funky::Page.find(page_id) }
@@ -34,7 +34,7 @@ describe 'Page' do
     context 'given a website url was passed' do
       let(:page_id) { website_url }
 
-      it { expect { page }.to raise_error Funky::ContentNotFound }
+      it { expect { page }.to raise_error(Funky::ContentNotFound) }
     end
   end
 end
