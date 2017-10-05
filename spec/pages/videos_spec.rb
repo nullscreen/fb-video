@@ -80,4 +80,18 @@ describe 'Page' do
       end
     end
   end
+
+  describe '#videos with since option' do
+    let(:page) { Funky::Page.find(page_id) }
+    let(:videos) { page.videos(since: since_date) }
+
+    context 'given an existing page ID and since date' do
+      let(:page_id) { fullscreen_page_id }
+      let(:since_date) { "2017-07-27" }
+
+      specify 'returns the first video of since date as the last' do
+        expect(videos.last.id).to eq('1517225178321185')
+      end
+    end
+  end
 end

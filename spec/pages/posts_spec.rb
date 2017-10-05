@@ -27,4 +27,18 @@ describe 'Page' do
       end
     end
   end
+
+  describe '#posts with since option' do
+    let(:page) { Funky::Page.find(page_id) }
+    let(:posts) { page.posts(since: since_date) }
+
+    context 'given an existing page ID and since date' do
+      let(:page_id) { fullscreen_page_id }
+      let(:since_date) { "2017-07-27" }
+
+      specify 'returns the first post of since date as the last' do
+        expect(posts.last.id).to eq('221406534569729_1516478451729191')
+      end
+    end
+  end
 end
