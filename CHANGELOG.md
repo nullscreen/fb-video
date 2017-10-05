@@ -6,6 +6,11 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.28 - 2017/10/05
+
+* [FEATURE] Add `since` option when it calls Page#videos and Page#posts to reduce
+amount of requests when it gets only recent items.
+
 ## 0.2.27 - 2017/08/28
 
 * [BUGFIX] Fetch the correct view count even for non-English pages
