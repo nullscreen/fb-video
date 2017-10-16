@@ -35,7 +35,7 @@ module Funky
         json = json_for(uri)
         if json[:data].empty?
           @try_count ||= 0
-          if @previous_timestamp && @try_count < 1 && (Date.parse @previous_timestamp rescue nil)
+          if @previous_timestamp && @try_count < 10 && (Date.parse @previous_timestamp rescue nil)
             timestamp = (Date.parse(@previous_timestamp) - 1).strftime('%F')
             @try_count += 1
             @previous_timestamp = timestamp
