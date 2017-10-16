@@ -31,8 +31,13 @@ module Funky
     #   fetched by Facebook Graph API.
     def videos(options = {})
       path_query = "#{id}/videos?fields=id,title,description,created_time,length,comments.limit(0).summary(true),likes.limit(0).summary(true),reactions.limit(0).summary(true)"
-      path_query << "&since=#{options[:since]}" if options[:since]
-      videos = Funky::Connection::API.fetch_all(path_query)
+      videos = []
+      if options[:since]
+        path_query << "&since=#{options[:since]}"
+        videos = Funky::Connection::API.fetch_all(path_query)
+      else
+        videos = Funky::Connection::API.fetch(path_query, is_array: true)
+      end
       videos.map {|video| Video.new(video) }
     end
 

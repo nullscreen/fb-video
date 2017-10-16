@@ -6,6 +6,11 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.30 - 2017/10/16
+
+* [BUGFIX] Test should pass when call Page#videos. Partly revert the change
+of version 0.2.28
+
 ## 0.2.29 - 2017/10/16
 
 * [ENHANCEMENT] Use request to get app access token. Do not use
