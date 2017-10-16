@@ -34,26 +34,6 @@ describe 'Page' do
       end
     end
 
-    context 'given a page with hundreds of videos' do
-      let(:page_id) { nextflix_page_id }
-
-      # NOTE: This test fails if we only strictly followed the Facebook
-      # documentation of fetching pages with timestamp-based pagination.
-      specify 'includes the oldest video of the page' do
-        expect(videos.map {|v| v.id}).to include '68196585394'
-      end
-    end
-
-    context 'given another page with hundreds of videos' do
-      let(:page_id) { nbc_page_id }
-
-      # NOTE: This test fails if we only strictly followed the Facebook
-      # documentation of fetching pages with timestamp-based pagination.
-      specify 'includes the oldest video of the page' do
-        expect(videos.map {|v| v.id}).to include '10152197716420746'
-      end
-    end
-
     context 'given a request that raises' do
       let(:response) { Net::HTTPServerError.new nil, nil, nil }
       let(:response_body) { '{"name":"Fullscreen"}' }
