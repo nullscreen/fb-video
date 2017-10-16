@@ -6,6 +6,11 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.29 - 2017/10/16
+
+* [ENHANCEMENT] Use request to get app access token. Do not use
+`app_id|app_secret` string.
+
 ## 0.2.28 - 2017/10/05
 
 * [FEATURE] Add `since` option when it calls Page#videos and Page#posts to reduce
