@@ -4,10 +4,11 @@ module Funky
     class Page
       def get(video_id:)
         body = response_for(video_id).body
-        if body.include? '<meta name="description"'
-          body
-        else
+
+        if body.include? '<title id="pageTitle">Facebook</title>'
           raise ContentNotFound, 'Please double check the ID and try again.'
+        else
+          body
         end
       end
 
