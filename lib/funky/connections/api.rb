@@ -8,7 +8,7 @@ module Funky
   module Connection
     class API < Base
       def self.fetch_all(path_query)
-        uri = URI "https://#{host}/v2.9/#{path_query}&limit=100&access_token=#{app_access_token}"
+        uri = URI "https://#{host}/v2.9/#{path_query}&limit=100&access_token=#{app_id}%7C#{app_secret}"
         fetch_data_with_paging_token(uri)
       end
 
@@ -24,7 +24,7 @@ module Funky
       end
 
       def self.fetch(path_query, is_array: false)
-        uri = URI "https://#{host}/v2.8/#{path_query}&limit=100&access_token=#{app_access_token}"
+        uri = URI "https://#{host}/v2.8/#{path_query}&limit=100&access_token=#{app_id}%7C#{app_secret}"
         is_array ? fetch_multiple_pages(uri).uniq : json_for(uri)
       rescue URI::InvalidURIError
         raise Funky::ContentNotFound, "Invalid URL"
@@ -66,14 +66,14 @@ module Funky
       def self.request(id:, fields:)
         uri = URI::HTTPS.build host: host,
           path: "/v2.8/#{id}",
-          query: "access_token=#{app_access_token}&fields=#{fields}"
+          query: "access_token=#{app_id}%7C#{app_secret}&fields=#{fields}"
         response_for(get_http_request(uri), uri)
       end
 
       def self.batch_request(ids:, fields:)
         uri = URI::HTTPS.build host: host,
           path: "/",
-          query: "include_headers=false&access_token=#{app_access_token}"
+          query: "include_headers=false&access_token=#{app_id}%7C#{app_secret}"
         batch = create_batch_for ids, fields
         http_request = post_http_request uri
         http_request.set_form_data batch: batch.to_json
@@ -92,14 +92,6 @@ module Funky
 
       def self.app_secret
         Funky.configuration.app_secret
-      end
-
-      def self.app_access_token
-        @app_access_token ||= begin
-          uri = URI::HTTPS.build host: host, path: "/v2.8/oauth/access_token",
-            query: URI.encode_www_form({client_id: app_id, client_secret: app_secret, grant_type: 'client_credentials'})
-          Funky::Connection::API.json_for(uri)[:access_token]
-        end
       end
 
       def self.post_http_request(uri)
