@@ -6,6 +6,9 @@ module Funky
         body = response_for(video_id).body
 
         if body.include? '<title id="pageTitle">Facebook</title>'
+          if body.include? 'content="Log In or Sign Up to View"'
+            raise VideoLoginRequired, 'Log in is required for viewing this video'
+          end
           raise ContentNotFound, 'Please double check the ID and try again.'
         else
           body
