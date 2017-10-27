@@ -3,6 +3,7 @@ require 'videos/shared/examples'
 
 describe 'Video' do
   let(:existing_video_id) { '1042790765791228' }
+  let(:restricted_video_id) { '1977533782517885' }
   let(:unknown_video_id) { 'does-not-exist' }
   let(:another_video_id) { '903078593095780' }
   let(:redirect_video_id) { '322742591438587' }
@@ -114,6 +115,11 @@ describe 'Video' do
       let(:video_id) { unknown_video_id }
 
       include_examples 'non-existing video'
+    end
+
+    context 'given a restricted video ID was passed' do
+      let(:video_id) { restricted_video_id }
+      it { expect {video}.to raise_error(Funky::VideoLoginRequired) }
     end
 
     context 'given a video ID with the cumulative views was passed' do
