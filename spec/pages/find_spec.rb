@@ -36,5 +36,17 @@ describe 'Page' do
 
       it { expect { page }.to raise_error(Funky::ContentNotFound) }
     end
+
+    context 'with invalid app access token' do
+      before { Funky::Connection::API.instance_variable_set :@app_access_token, 'invalid-token' }
+
+      context 'given an existing page ID' do
+        let(:page_id) { existing_page_id }
+
+        specify 'does not raise error by refreshing' do
+          expect{ page }.not_to raise_error
+        end
+      end
+    end
   end
 end

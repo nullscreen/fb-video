@@ -52,7 +52,7 @@ module Funky
 
       def self.uri_with_query(uri, query={})
         return nil if uri.nil?
-        new_query = URI.decode_www_form(uri.query).to_h.merge(query)
+        new_query = URI.decode_www_form(uri.query).to_h.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}.merge(query)
         uri.query = URI.encode_www_form(new_query)
         uri
       end
