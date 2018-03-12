@@ -23,6 +23,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "simplecov", "0.11.2"
-  spec.add_development_dependency "yard", "0.8.7.6"
+  spec.add_development_dependency "yard", "0.9.12"
   spec.add_development_dependency 'coveralls', "0.8.13"
 end
