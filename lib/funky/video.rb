@@ -115,6 +115,7 @@ module Funky
     #   and encapsulated into a Funky::Video object.
     def self.find(video_id)
       counters = @@html_parser.parse html: @@html_page.get(video_id: video_id), video_id: video_id
+      raise CountersNotFound, "View count not found with video ID #{video_id}" unless counters[:view_count]
       new counters.merge(id: video_id)
     end
 
