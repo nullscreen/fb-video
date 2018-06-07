@@ -127,6 +127,15 @@ describe 'Video' do
 
       include_examples 'server errors'
     end
+
+    context 'given counters are not present' do
+      let(:video_id) { existing_video_id }
+
+      it do
+        expect_any_instance_of(Funky::HTML::Page).to receive(:get).with(video_id: existing_video_id).and_return('')
+        expect {video}.to raise_error(Funky::CountersNotFound)
+      end
+    end
   end
 
   describe '.find_by_url!(url)' do
