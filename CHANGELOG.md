@@ -6,6 +6,11 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.32 - 2018/06/07
+
+* [FEATURE] Raise Funky::CountersNotFound error when a video does not have
+its view count.
+
 ## 0.2.31 - 2017/10/25
 
 * [BUGFIX] Revert the change of version 0.2.29 and do not use request to get app
