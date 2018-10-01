@@ -5,14 +5,30 @@ module Funky
 
     private
 
+      def self.instrument(uri, request, &block)
+        data = {
+          request: request,
+          method: request.method,
+          request_uri: uri
+        }
+        if defined?(ActiveSupport::Notifications)
+          ActiveSupport::Notifications.instrument 'request.funky', data, &block
+        else
+          yield data
+        end
+      end
+
       def self.get_http_request(uri)
         Net::HTTP::Get.new(uri.request_uri)
       end
 
       def self.response_for(http_request, uri, max_retries = 5)
-        response = Net::HTTP.start(uri.host, 443, use_ssl: true) do |http|
-          http.request http_request
+        response = instrument(uri, http_request) do |data|
+          data[:response] = Net::HTTP.start(uri.host, 443, use_ssl: true) do |http|
+            http.request http_request
+          end
         end
+
         if response.is_a? Net::HTTPSuccess
           response
         elsif response.is_a? Net::HTTPServerError
