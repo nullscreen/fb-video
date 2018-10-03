@@ -6,6 +6,10 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.33 - 2018/10/03
+
+* [FEATURE] Add ActiveSupport::Notification based instrumentation.
+
 ## 0.2.32 - 2018/06/07
 
 * [FEATURE] Raise Funky::CountersNotFound error when a video does not have
