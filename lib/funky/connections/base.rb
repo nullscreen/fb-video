@@ -14,7 +14,7 @@ module Funky
         if defined?(ActiveSupport::Notifications)
           ActiveSupport::Notifications.instrument 'request.funky', data, &block
         else
-          yield data
+          block.call(data)
         end
       end
 
