@@ -6,6 +6,10 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.34 - 2018/10/19
+
+* [BUGFIX] Fetch the comment count, with more Facebook videos.
+
 ## 0.2.33 - 2018/10/03
 
 * [FEATURE] Add ActiveSupport::Notification based instrumentation.
