@@ -104,6 +104,12 @@ describe 'Video' do
       include_examples 'check id and counters'
     end
 
+    context 'given a video with a new HTML for comment count' do
+      let(:video_id) { '282706059012092' }
+
+      include_examples 'check id and counters'
+    end
+
     context 'given an existing video ID of a video with more than 800 likes was passed' do
       let(:video_id) { existing_video_id }
 
