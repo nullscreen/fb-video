@@ -35,6 +35,7 @@ module Funky
       def extract_comments_from(html, video_id)
         html.match /"commentcount":(.*?),/
         html.match(/commentcount:(\d+),commentcountreduced/) if $1.nil?
+        html.match /commentcount:(\d+),commentTotalCount/ if $1.nil?
         html.match /commentcount:(\d+),.*commentstargetfbid:"#{video_id}"/ if $1.nil?
         matched_count $1
       end
