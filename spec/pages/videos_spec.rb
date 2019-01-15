@@ -67,10 +67,10 @@ describe 'Page' do
 
     context 'given an existing page ID and since date' do
       let(:page_id) { fullscreen_page_id }
-      let(:since_date) { "2017-07-27" }
+      let(:since_date) { "2018-01-27" }
 
       specify 'returns the first video of since date as the last' do
-        expect(videos.last.id).to eq('1517225178321185')
+        expect(videos.last.id).to eq('1684727541570947')
       end
     end
   end
