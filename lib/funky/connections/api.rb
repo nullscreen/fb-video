@@ -7,8 +7,10 @@ module Funky
   # @api private
   module Connection
     class API < Base
+      FB_API_VERSION = 'v2.10'
+
       def self.fetch_all(path_query)
-        uri = URI "https://#{host}/v2.9/#{path_query}&limit=100&access_token=#{app_id}%7C#{app_secret}"
+        uri = URI "https://#{host}/#{FB_API_VERSION}/#{path_query}&limit=100&access_token=#{app_id}%7C#{app_secret}"
         fetch_data_with_paging_token(uri)
       end
 
@@ -24,7 +26,7 @@ module Funky
       end
 
       def self.fetch(path_query, is_array: false)
-        uri = URI "https://#{host}/v2.8/#{path_query}&limit=100&access_token=#{app_id}%7C#{app_secret}"
+        uri = URI "https://#{host}/#{FB_API_VERSION}/#{path_query}&limit=100&access_token=#{app_id}%7C#{app_secret}"
         is_array ? fetch_multiple_pages(uri).uniq : json_for(uri)
       rescue URI::InvalidURIError
         raise Funky::ContentNotFound, "Invalid URL"
@@ -65,7 +67,7 @@ module Funky
 
       def self.request(id:, fields:)
         uri = URI::HTTPS.build host: host,
-          path: "/v2.8/#{id}",
+          path: "/#{FB_API_VERSION}/#{id}",
           query: "access_token=#{app_id}%7C#{app_secret}&fields=#{fields}"
         response_for(get_http_request(uri), uri)
       end
@@ -100,7 +102,7 @@ module Funky
 
       def self.create_batch_for(ids, fields)
         ids.map do |id|
-          {"method":"GET", "relative_url": "/v2.8/#{id}?fields=#{fields}"}
+          {"method":"GET", "relative_url": "/#{FB_API_VERSION}/#{id}?fields=#{fields}"}
         end
       end
     end

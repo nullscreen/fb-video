@@ -4,7 +4,7 @@ require 'pages/shared/examples'
 describe 'Page' do
   let(:existing_page_id) { '1191441824276882' }
   let(:unknown_page_id) { 'does-not-exist' }
-  let(:another_page_id) { '526533744142224' }
+  let(:another_page_id) { '20531316728' }
 
   describe '.where(id: page_ids)' do
     let(:pages) { Funky::Page.where(id: page_ids) }
