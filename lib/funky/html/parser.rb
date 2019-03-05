@@ -15,6 +15,7 @@ module Funky
         html.match(/"sharecount":(.*?),/)
         html.match(/sharecount:(\d+),sharecountreduced/) if $1.nil?
         html.match(/sharecount:(\d+),.*sharefbid:"#{video_id}"/) if $1.nil?
+        html.match(/share_count:{count:(\d+)}/) if $1.nil?
         matched_count $1
       end
 
@@ -29,6 +30,7 @@ module Funky
       def extract_likes_from(html)
         html.match(/"likecount":(\d+),"likecountreduced"/)
         html.match(/likecount:(\d+),likecountreduced/) if $1.nil?
+        html.match(%r[{localized_name:"Like",reaction_type:"LIKE",id:"1635855486666999",key:1},reaction_count:(\d+)}])
         matched_count $1
       end
 
@@ -37,6 +39,7 @@ module Funky
         html.match(/commentcount:(\d+),commentcountreduced/) if $1.nil?
         html.match /commentcount:(\d+),commentTotalCount/ if $1.nil?
         html.match /commentcount:(\d+),.*commentstargetfbid:"#{video_id}"/ if $1.nil?
+        html.match(/comment_count:{total_count:(\d+)}/) if $1.nil?
         matched_count $1
       end
 
