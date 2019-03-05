@@ -6,6 +6,11 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.36 - 2019/03/05
+
+* [BUGFIX] Fetch comment count, share count, like count for Facebook
+videos with different HTML.
+
 ## 0.2.35 - 2019/01/14
 
 * [ENHANCEMENT] Use 2.10 of Facebook Graph API (upgrade from 2.8).
