@@ -6,6 +6,10 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
+## 0.2.37 - 2019/07/23
+
+* [BUGFIX] Allow funky to scrape view count for more videos
+
 ## 0.2.36 - 2019/03/05
 
 * [BUGFIX] Fetch comment count, share count, like count for Facebook
@@ -14,8 +18,8 @@ videos with different HTML.
 ## 0.2.35 - 2019/01/14
 
 * [ENHANCEMENT] Use 2.10 of Facebook Graph API (upgrade from 2.8).
-- There will be deprecations in v2.8 of the Facebook Graph API soon. Check out [the changelog](https://developers.facebook.com/docs/apps/changelog).
-- Funky API is not changed. (Test is still passing)
+  - There will be deprecations in v2.8 of the Facebook Graph API soon. Check out [the changelog](https://developers.facebook.com/docs/apps/changelog).
+  - Funky API is not changed. (The same test is still passing)
 
 ## 0.2.34 - 2018/10/19
 
