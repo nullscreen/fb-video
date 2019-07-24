@@ -24,6 +24,7 @@ module Funky
         html.match(/postViewCount:"([\d,.]*?)",/) if $1.nil?
         html.match /<div class=\"_1vx9\"><span>([\d,.]*?) .*?<\/span><\/div>/ if $1.nil?
         html.match /id=\"u_0_w\">([\d,.]*?) .*?<\/span><\/div>/ if $1.nil?
+        html.match />([\d,.]*?) Views<\/span><\/div>/ if $1.nil?
         html.match %r{([\d,.]*?) views from this post} if $1.nil?
         matched_count $1
       end
