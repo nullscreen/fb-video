@@ -32,7 +32,8 @@ module Funky
       def extract_likes_from(html)
         html.match(/"likecount":(\d+),"likecountreduced"/)
         html.match(/likecount:(\d+),likecountreduced/) if $1.nil?
-        html.match(%r[{localized_name:"Like",reaction_type:"LIKE",id:"1635855486666999",key:1},reaction_count:(\d+)}])
+        html.match(%r[{localized_name:"Like",reaction_type:"LIKE",id:"1635855486666999",key:1},reaction_count:(\d+)}]) if $1.nil?
+        html.match(%r[{reaction_count:(\d+),node:{key:1,id:"1635855486666999",localized_name:"Like",reaction_type:"LIKE"}]) if $1.nil?
         matched_count $1
       end
 
