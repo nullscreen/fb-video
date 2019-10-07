@@ -6,7 +6,12 @@ For more information about changelogs, check
 [Keep a Changelog](http://keepachangelog.com) and
 [Vandamme](http://tech-angels.github.io/vandamme).
 
-## 0.2.37 - 2019/07/23
+
+## 0.2.38 - 2019/10/07
+
+* [BUGFIX] Fetch like count for more Facebook videos.
+
+## 0.2.37 - 2019/07/23 (Do not use)
 
 * [BUGFIX] Allow funky to scrape view count for more videos
 
